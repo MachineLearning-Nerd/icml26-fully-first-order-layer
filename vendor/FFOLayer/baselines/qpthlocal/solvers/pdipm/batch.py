@@ -7,7 +7,7 @@ from ...util import get_sizes, bdiag
 
 
 def lu_hack(x):
-    data, pivots = torch.linalg.lu_factor(x, pivot=not x.is_cuda)
+    data, pivots = torch.linalg.lu_factor(x.contiguous(), pivot=not x.is_cuda)
 
     if x.is_cuda:
         if x.ndimension() == 2:
