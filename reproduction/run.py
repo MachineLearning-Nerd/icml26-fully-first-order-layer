@@ -64,6 +64,27 @@ def main():
     run_checked(
         [sys.executable, "-m", "reproduction.benchmark_check", str(claim_4)]
     )
+    claim_6_calibration = output / "claim_6_calibration.json"
+    run_checked(
+        [
+            sys.executable,
+            "-m",
+            "reproduction.lpgd_calibration",
+            "--cores",
+            "8",
+            "--output",
+            str(claim_6_calibration),
+        ],
+        stream=True,
+    )
+    run_checked(
+        [
+            sys.executable,
+            "-m",
+            "reproduction.lpgd_calibration_check",
+            str(claim_6_calibration),
+        ]
+    )
     controls = {
         "forbidden_oracle_exit": run_expected_failure(
             [

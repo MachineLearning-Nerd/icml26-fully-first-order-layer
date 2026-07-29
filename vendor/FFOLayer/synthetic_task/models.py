@@ -144,6 +144,7 @@ class OptModel(nn.Module):
         
         self.constraint_learnable = constraint_learnable
         self.is_QP = is_QP
+        self.backward_eps = backward_eps
         self.y_dim = opt_dim
         self.input_dim = input_dim
         self.num_ineq = 2*opt_dim + 1
@@ -339,7 +340,10 @@ class OptModel(nn.Module):
                 params_batched = [Q_batched, q_pred, G_batched, h_batched]
                 
                 if self.layer_type==LPGD:
-                    sol, = self.optlayer(*params_batched, solver_args={"eps": 1e-3}) #default eps for lpgd
+                    sol, = self.optlayer(
+                        *params_batched,
+                        solver_args={"eps": self.backward_eps},
+                    )
                 elif self.layer_type==CVXPY_LAYER:
                     sol, = self.optlayer(*params_batched)
                 else:

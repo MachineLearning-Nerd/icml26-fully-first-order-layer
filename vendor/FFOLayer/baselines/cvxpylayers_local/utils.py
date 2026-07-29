@@ -1,7 +1,7 @@
 
 import numpy as np
 import diffcp
-# import diffcp_lpgd
+import diffcp_lpgd
 import time
 from dataclasses import dataclass
 from typing import Any
@@ -83,7 +83,7 @@ def forward_numpy(params_numpy, context):
     try:
         if context.solve_and_derivative:
             if context.lpgd:
-                xs, _, _, _, DT_batch = diffcp.solve_and_derivative_batch(
+                xs, _, _, _, DT_batch = diffcp_lpgd.solve_and_derivative_batch(
                     As, bs, cs, cone_dicts, mode='lpgd', derivative_kwargs=dict(tau=1e-4, rho=0.1), **context.solver_args)
             else:
                 xs, _, _, _, DT_batch = diffcp.solve_and_derivative_batch(
@@ -94,7 +94,7 @@ def forward_numpy(params_numpy, context):
             #     As, bs, cs, cone_dicts, **context.solver_args)
             xs, _, _ = diffcp.solve_only_batch(
                 As, bs, cs, cone_dicts, **context.solver_args)
-    except diffcp.SolverError as e:
+    except (diffcp.SolverError, diffcp_lpgd.SolverError) as e:
         print(
             "Please consider re-formulating your problem so that "
             "it is always solvable or increasing the number of "

@@ -1,0 +1,21 @@
+{
+  "claim": 6,
+  "exact_claim": "FFOLayer outperforms actual LPGD in the reported experiments while avoiding Hessian inversion",
+  "calibration": {
+    "status": "CALIBRATION_ONLY",
+    "reported_scaling_dimension": 200,
+    "input_dim": 640,
+    "batch_size": 8,
+    "training_steps": 1,
+    "purpose": "measure actual LPGD construction and step cost before fixing the full comparison horizon"
+  },
+  "full_decision": "requires actual LPGD and FFOLayer full-horizon loss curves at a reported dimension, multiple seeds, a fixed convergence margin, runtime evidence, and the already accepted no-Hessian source/oracle audit",
+  "lpgd": {
+    "upstream_commit": "3e7243a808ce983279e31c24932188ee905c58d0",
+    "mode": "lpgd",
+    "tau": 0.0001,
+    "rho": 0.1,
+    "tight_solver_tolerance": 1e-12
+  },
+  "verdicts": ["VERIFIED", "FALSIFIED", "BLOCKED"]
+}
