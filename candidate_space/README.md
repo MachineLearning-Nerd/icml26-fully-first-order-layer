@@ -1,5 +1,5 @@
 ---
-title: "FFOLayer: First-Order Differentiable Optimization — jJur8Fq7IK"
+title: "FFOLayer: claim-by-claim reproduction — jJur8Fq7IK"
 emoji: 🔧
 colorFrom: yellow
 colorTo: red
@@ -13,13 +13,13 @@ tags:
  - paper-jJur8Fq7IK
 ---
 
-# FFOLayer: First-Order Differentiable Optimization — jJur8Fq7IK
+# FFOLayer: claim-by-claim reproduction
 
-Start with the [current verification](pages/current/page.md). It identifies the
-fixed command, pinned environment, executable verifier, raw output, independent
-checker, controls, assumptions, and limitations.
+Start with the [current cumulative verification](pages/current/page.md). It
+links every claim, exact source contract, executable checker, raw result,
+control, limitation, commit, seed, CPU allocation, and runtime.
+The [release forecast and provenance](pages/release/page.md) is also inline.
 
-The prior judged page remains reachable as
-[Historical rejected baseline](pages/overview/page.md). An immutable copy of
-the complete judged revision is preserved under
-[`historical/judged_ff4102a/`](historical/judged_ff4102a/).
+The exact judged revision `ff4102a` is preserved unchanged under
+[`historical/judged_ff4102a/`](historical/judged_ff4102a/). Its former default
+page is labeled [Historical rejected baseline](pages/overview/page.md).

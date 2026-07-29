@@ -1,86 +1,45 @@
-# Current verification
+# Current cumulative verification
 
-This page supersedes the **Historical rejected baseline** as the current
-verification surface. It uses the frozen verifier revision
-`021260fef3648000d7b668e82c6fb461e483cbc3` and the one fixed command:
+Previous live judged score: **6/12**. Conservative projected score:
+**10–12/12**. Best-supported possible score: **12/12 (forecast, not a judge
+result)**.
+
+The fixed command is:
 
 ```bash
 uv run --frozen python -m reproduction.run
 ```
 
-The environment is pinned in
-[pyproject.toml](../../evidence/current/pyproject.toml) and
-[uv.lock](../../evidence/current/uv.lock). The complete current executable is
-[verify.py](../../evidence/current/reproduction/verify.py), with an independent
-[checker](../../evidence/current/reproduction/check.py) and the fixed
-[runner](../../evidence/current/reproduction/run.py).
+Clean run `0d73138a-819e-4596-b2d1-b194b364f3a8` used Git
+`1d80e5b88705879f998c63357fb06088062d103e`, Python 3.11.14, Hugging Face
+`cpu-upgrade`, eight numerical threads, and an actual allocation of 64 CPUs.
+The cumulative command passed in 6,636.64 seconds. All seven negative controls
+exited 2. See [runtime JSON](../../evidence/current/runtime.json),
+[checker output](../../evidence/current/checker_output.txt), and
+[control output](../../evidence/current/negative_control_output.txt).
 
-## Claim 1 — VERIFIED
+## Visibility matrix
 
-**Exact tested claim.** Algorithm 1 estimates the hypergradient with no
-Hessian/sensitivity-inverse evaluation and two lower-level solves per estimate;
-under the audited local regularity assumptions its finite-difference error is
-first order in `delta`.
+| Claim | Canonical page | Code visible | Data inline | Raw link | Checker | Control | Exact claim tested | Reviewer verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | [Claim 1](../claims/claim_1/page.md) | yes | yes | yes | yes | yes | yes | VERIFIED |
+| 2 | [Claim 2](../claims/claim_2/page.md) | yes | yes | yes | yes | yes | yes | VERIFIED |
+| 3 | [Claim 3](../claims/claim_3/page.md) | yes | yes | yes | yes | yes | yes | VERIFIED |
+| 4 | [Claim 4](../claims/claim_4/page.md) | yes | yes | yes | yes | yes | yes | FALSIFIED |
+| 5 | [Claim 5](../claims/claim_5/page.md) | yes | yes | yes | yes | yes | yes | VERIFIED |
+| 6 | [Claim 6](../claims/claim_6/page.md) | yes | yes | yes | yes | yes | yes | FALSIFIED |
 
-**Source and assumptions.** The source is arXiv 2512.02494v2, Algorithm 1 and
-the adjacent accuracy theorem in
-`icml_2026/05_bilevel_algo_with_theory.tex`. The eight QPs are strongly convex,
-have LICQ, strictly positive active multipliers, and locally constant active
-sets. Active-set sizes span 1–4. See the exact
-[claim contract](../../evidence/current/claim_1/claim_contract.json) and
-[source audit](../../evidence/current/claim_1/source_audit.md).
+Pinned inputs: [pyproject.toml](../../evidence/current/pyproject.toml),
+[uv.lock](../../evidence/current/uv.lock), and
+[executable source](../../evidence/current/code/). Source paper:
+arXiv 2512.02494v2, source SHA-256
+`043f3bd9b03d410e1cd7fd8f4949efdb78b6410d42fc83b33b9ec7da8a81b90b`.
 
-| Measurement | Accepted result |
-| --- | ---: |
-| Seeds / rows | 8 / 32 |
-| Finite-difference deltas | `1e-2, 1e-3, 1e-4, 1e-5` |
-| Median log-log error slope | `0.9944826022` |
-| Worst relative error at `delta=1e-5` | `1.3208546e-5` |
-| Median final-decade contraction | `9.9961076x` |
-| Lower solves per estimate | `2` |
-| Exact-sensitivity calls per FFO estimate | `0` |
+## Honest limits
 
-The independent checker passed. The forbidden-oracle control deliberately
-called the KKT sensitivity routine and exited `2`, as required.
-
-## Claim 2 — VERIFIED
-
-**Exact tested claim.** At a differentiable point with LICQ and a locally
-constant active set, replacing active inequalities by equalities preserves the
-solution and hypergradient.
-
-**Source and assumptions.** This is Theorem 4.1 in
-`icml_2026/04_bilevel_formulization_for_differentiable_optimization.tex`.
-The same strong-convexity, LICQ, strict-multiplier, differentiability, and local
-active-set assumptions are audited in the
-[claim contract](../../evidence/current/claim_2/claim_contract.json) and
-[source audit](../../evidence/current/claim_2/source_audit.md).
-
-| Measurement | Accepted result |
-| --- | ---: |
-| Seeds / active-set sizes | `8 / 1–4` |
-| Original-vs-ghost solution error | `0` |
-| Original-vs-ghost hypergradient error | `0` |
-| Independent central-difference error | `1.4833786e-9` |
-
-The active-boundary control has left derivative `0` and right derivative `1`;
-it exited `2` because the theorem's differentiability/local-constancy
-assumptions fail there.
-
-## Reproducibility and raw evidence
-
-The accepted run used Hugging Face `cpu-upgrade`: estimated science cores `1`,
-actual allocation `64`, science runtime `1.1956 s`, full job duration `26 s`,
-Python `3.11.14`. Seeds are listed in the downloadable
-[raw accepted summary](../../evidence/current/accepted_summary.json).
-The exact [checker output](../../evidence/current/checker_output.txt) and
-[negative-control output](../../evidence/current/negative_control_output.txt)
-are also downloadable. Any contract or checker failure exits nonzero.
-
-## Limitations
-
-These checks rigorously preserve the two claims already awarded full credit.
-They are constrained-QP calibrations, not evidence for the general-convex
-complexity claim or the full synthetic/Sudoku/LPGD benchmarks. Those claims
-remain under active investigation and are not upgraded on this page.
-
+Claim 3's universal rate rests on an independently reconstructed symbolic
+dependency certificate, not on fitting a finite empirical slope. Claim 4 is
+falsified through its full-scale backward-speed conjunct; that logical
+counterexample does not claim the Sudoku accuracy conjunct is false. Claim 6
+is falsified at the smallest dimension explicitly reported in Figure 5 with
+five rather than ten seeds. The judge alone can change the score.

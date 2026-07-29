@@ -1,0 +1,19 @@
+{
+  "claim": "At a differentiable point with LICQ and locally constant active set, replacing active inequalities by equalities preserves the solution and hypergradient.",
+  "source_anchor": "paper source: icml_2026/04_bilevel_formulization_for_differentiable_optimization.tex, Theorem 4.1",
+  "assumptions_tested": [
+    "LICQ",
+    "strong convexity",
+    "strict active multipliers",
+    "locally constant active set",
+    "differentiable composite objective"
+  ],
+  "acceptance": {
+    "instances": 8,
+    "solution_error_max": 1e-10,
+    "ghost_gradient_error_max": 1e-10,
+    "independent_central_difference_error_max": 1e-5
+  },
+  "verdict_on_pass": "VERIFIED"
+}
+

@@ -1,0 +1,307 @@
+{
+  "all_finite": true,
+  "comparisons": 27,
+  "constructor_change": "CvxpyLayer -> FFOLayer plus numerical tolerances",
+  "cvxtorch_commit": "bae2d6494695a19cf1d2ee275d9058de3311a272",
+  "max_gradient_relative_l2_error": 9.820329262893569e-05,
+  "max_output_l2_error": 3.803502133006339e-09,
+  "min_gradient_cosine": 0.9999999951780578,
+  "objective_reuse": "one FFOLayer instance reused unchanged for all three upper objectives",
+  "official_repository_commit": "28905f3e1750fca5b8918954d5d2ea5bed0cbacc",
+  "program_classes": [
+    "box_qp",
+    "budget_qp",
+    "soc_qp"
+  ],
+  "released_source_sha256": "8513e838a742b797efea7a08180f72c5fa1b6f8c5291a5070d717b96a686ddd9",
+  "rows": [
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999608,
+      "gradient_l2_error": 2.992345205413044e-07,
+      "gradient_relative_l2_error": 2.8058549321934274e-07,
+      "objective": "linear",
+      "output_l2_error": 1.5905937246660384e-09,
+      "problem": "box_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999537,
+      "gradient_l2_error": 1.1908772653289815e-07,
+      "gradient_relative_l2_error": 3.1182511116072954e-07,
+      "objective": "quadratic",
+      "output_l2_error": 1.5905937246660384e-09,
+      "problem": "box_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999969,
+      "gradient_l2_error": 2.1371371270351178e-08,
+      "gradient_relative_l2_error": 8.32020041729386e-08,
+      "objective": "logsumexp",
+      "output_l2_error": 1.5905937246660384e-09,
+      "problem": "box_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999998875723,
+      "gradient_l2_error": 1.689690463451442e-05,
+      "gradient_relative_l2_error": 1.5843848224329182e-05,
+      "objective": "linear",
+      "output_l2_error": 1.5189189790589478e-09,
+      "problem": "box_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999608,
+      "gradient_l2_error": 1.0736035678394714e-07,
+      "gradient_relative_l2_error": 2.882056507111126e-07,
+      "objective": "quadratic",
+      "output_l2_error": 1.5189189790589478e-09,
+      "problem": "box_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.999999999999997,
+      "gradient_l2_error": 1.9922194868211342e-08,
+      "gradient_relative_l2_error": 7.785928930673231e-08,
+      "objective": "logsumexp",
+      "output_l2_error": 1.5189189790589478e-09,
+      "problem": "box_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999996854869,
+      "gradient_l2_error": 2.8663480962943212e-05,
+      "gradient_relative_l2_error": 2.6877102589625458e-05,
+      "objective": "linear",
+      "output_l2_error": 3.803502133006339e-09,
+      "problem": "box_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999977536868,
+      "gradient_l2_error": 2.5018380690035597e-05,
+      "gradient_relative_l2_error": 6.702830861140071e-05,
+      "objective": "quadratic",
+      "output_l2_error": 3.803502133006339e-09,
+      "problem": "box_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999951780578,
+      "gradient_l2_error": 2.504521770030721e-05,
+      "gradient_relative_l2_error": 9.820329262893569e-05,
+      "objective": "logsumexp",
+      "output_l2_error": 3.803502133006339e-09,
+      "problem": "box_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.99999999999616,
+      "gradient_l2_error": 2.8796203656100213e-06,
+      "gradient_relative_l2_error": 2.771265124592155e-06,
+      "objective": "linear",
+      "output_l2_error": 2.0101743004834614e-10,
+      "problem": "budget_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999800856,
+      "gradient_l2_error": 2.856856158083574e-06,
+      "gradient_relative_l2_error": 6.312525843785272e-06,
+      "objective": "quadratic",
+      "output_l2_error": 2.0101743004834614e-10,
+      "problem": "budget_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999975490176,
+      "gradient_l2_error": 2.8864367127639053e-06,
+      "gradient_relative_l2_error": 7.00418624936282e-05,
+      "objective": "logsumexp",
+      "output_l2_error": 2.0101743004834614e-10,
+      "problem": "budget_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999968915,
+      "gradient_l2_error": 6.513287738104172e-06,
+      "gradient_relative_l2_error": 6.268203743335002e-06,
+      "objective": "linear",
+      "output_l2_error": 1.1122003856853765e-10,
+      "problem": "budget_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.999999999990316,
+      "gradient_l2_error": 2.075407241067582e-06,
+      "gradient_relative_l2_error": 4.402327356983771e-06,
+      "objective": "quadratic",
+      "output_l2_error": 1.1122003856853765e-10,
+      "problem": "budget_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999987423279,
+      "gradient_l2_error": 2.1041125853639596e-06,
+      "gradient_relative_l2_error": 5.0177352024906245e-05,
+      "objective": "logsumexp",
+      "output_l2_error": 1.1122003856853765e-10,
+      "problem": "budget_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999896756,
+      "gradient_l2_error": 4.729909384774507e-06,
+      "gradient_relative_l2_error": 4.551930899274937e-06,
+      "objective": "linear",
+      "output_l2_error": 4.2299662780130725e-11,
+      "problem": "budget_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999971073,
+      "gradient_l2_error": 1.1554239005981178e-06,
+      "gradient_relative_l2_error": 2.406418138204045e-06,
+      "objective": "quadratic",
+      "output_l2_error": 4.2299662780130725e-11,
+      "problem": "budget_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999996384134,
+      "gradient_l2_error": 1.184831525726861e-06,
+      "gradient_relative_l2_error": 2.691027095625009e-05,
+      "objective": "logsumexp",
+      "output_l2_error": 4.2299662780130725e-11,
+      "problem": "budget_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 1.0000000000000002,
+      "gradient_l2_error": 5.836381509338045e-09,
+      "gradient_relative_l2_error": 7.081098389702407e-09,
+      "objective": "linear",
+      "output_l2_error": 3.592983995375231e-11,
+      "problem": "soc_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 1.0,
+      "gradient_l2_error": 6.1022057202764526e-09,
+      "gradient_relative_l2_error": 2.2706604527618053e-08,
+      "objective": "quadratic",
+      "output_l2_error": 3.592983995375231e-11,
+      "problem": "soc_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999998,
+      "gradient_l2_error": 2.8368908230162724e-09,
+      "gradient_relative_l2_error": 1.4789820258122732e-08,
+      "objective": "logsumexp",
+      "output_l2_error": 3.592983995375231e-11,
+      "problem": "soc_qp",
+      "seed": 271
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 1.0,
+      "gradient_l2_error": 1.679730100612562e-09,
+      "gradient_relative_l2_error": 2.031741475002389e-09,
+      "objective": "linear",
+      "output_l2_error": 3.145428351693937e-11,
+      "problem": "soc_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 1.0000000000000002,
+      "gradient_l2_error": 6.783587627968059e-09,
+      "gradient_relative_l2_error": 2.5199021590914377e-08,
+      "objective": "quadratic",
+      "output_l2_error": 3.145428351693937e-11,
+      "problem": "soc_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 1.0000000000000002,
+      "gradient_l2_error": 3.165718644640858e-09,
+      "gradient_relative_l2_error": 1.64817259111668e-08,
+      "objective": "logsumexp",
+      "output_l2_error": 3.145428351693937e-11,
+      "problem": "soc_qp",
+      "seed": 383
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 1.0000000000000002,
+      "gradient_l2_error": 3.4495794074775947e-09,
+      "gradient_relative_l2_error": 4.2854528389191245e-09,
+      "objective": "linear",
+      "output_l2_error": 1.2050243463917225e-11,
+      "problem": "soc_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999998,
+      "gradient_l2_error": 1.1113745337224081e-08,
+      "gradient_relative_l2_error": 4.23988411290311e-08,
+      "objective": "quadratic",
+      "output_l2_error": 1.2050243463917225e-11,
+      "problem": "soc_qp",
+      "seed": 419
+    },
+    {
+      "finite": true,
+      "gradient_cosine": 0.9999999999999997,
+      "gradient_l2_error": 5.281287942317987e-09,
+      "gradient_relative_l2_error": 2.7780728217126624e-08,
+      "objective": "logsumexp",
+      "output_l2_error": 1.2050243463917225e-11,
+      "problem": "soc_qp",
+      "seed": 419
+    }
+  ],
+  "same_call_shape": true,
+  "seeds": [
+    271,
+    383,
+    419
+  ],
+  "source_path_audit": {
+    "backward_accepts_upstream_dvars": true,
+    "parameters_detached_before_local_autograd": true,
+    "upstream_dvars_converted_without_graph": true
+  },
+  "upper_objectives": [
+    "linear",
+    "quadratic",
+    "logsumexp"
+  ],
+  "verdict": "VERIFIED",
+  "wrong_upstream_coefficient_gradient_gap": 0.557838364930253
+}
