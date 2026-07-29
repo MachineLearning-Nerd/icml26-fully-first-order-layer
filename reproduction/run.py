@@ -7,8 +7,13 @@ import time
 from pathlib import Path
 
 
-def run_checked(command):
-    completed = subprocess.run(command, check=False, text=True, capture_output=True)
+def run_checked(command, stream=False):
+    completed = subprocess.run(
+        command,
+        check=False,
+        text=True,
+        capture_output=not stream,
+    )
     if completed.stdout:
         print(completed.stdout, end="")
     if completed.stderr:
@@ -53,7 +58,8 @@ def main():
     )
     claim_4 = output / "claim_4.json"
     run_checked(
-        [sys.executable, "-m", "reproduction.benchmark", "--output", str(claim_4)]
+        [sys.executable, "-m", "reproduction.benchmark", "--output", str(claim_4)],
+        stream=True,
     )
     run_checked(
         [sys.executable, "-m", "reproduction.benchmark_check", str(claim_4)]
