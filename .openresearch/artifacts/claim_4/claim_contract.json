@@ -11,6 +11,7 @@
   "numerical_contract": {
     "closed_form_solution_max_abs_error": 0.005,
     "decision_loss_equivalence_absolute_margin": 0.005,
+    "fresh_processes_per_method_seed": 2,
     "paired_seeds": [1, 2, 3, 4, 5],
     "substantial_speed_factor": 1.25
   },

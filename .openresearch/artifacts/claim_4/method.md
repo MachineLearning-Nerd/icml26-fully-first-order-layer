@@ -3,8 +3,10 @@
 For each of five paired seeds, generate the released 2,000-example synthetic
 dataset and identically initialized predictor, then execute the actual
 FFOLayer, qpth, and CvxpyLayer backward kernels at `y_dim=800`, batch size 1.
-One warm-up precedes two timed repetitions. Each subprocess has an eight-core
-affinity on an HF `cpu-upgrade` allocation.
+Two process-isolated calls are timed per method/seed pair and their median is
+the paired observation. Each subprocess has an eight-core affinity on an HF
+`cpu-upgrade` allocation. Fresh processes bound retained solver state after a
+same-process route was OOM-killed.
 
 The QP has the independent closed-form solution `clip(-q, -1, 0)`. The checker
 requires every method to be within 0.005 of that solution, feasible within the

@@ -23,8 +23,8 @@ def main():
 
     kernels = evidence["backward_kernels"]
     rows = kernels["measurements"]
-    if len(rows) != 15:
-        fail(f"expected 15 paired method/seed rows, found {len(rows)}")
+    if len(rows) != 30:
+        fail(f"expected 30 process-isolated method/seed rows, found {len(rows)}")
     if sorted({row["seed"] for row in rows}) != [1, 2, 3, 4, 5]:
         fail("the preregistered five-seed set is incomplete")
     if sorted({row["method"] for row in rows}) != [
@@ -33,9 +33,11 @@ def main():
         "qpth",
     ]:
         fail("a released comparison method is missing")
+    if sorted({row["replicate"] for row in rows}) != [1, 2]:
+        fail("a process-isolated replicate is missing")
     numeric_keys = [
-        "median_forward_seconds",
-        "median_backward_seconds",
+        "forward_seconds",
+        "backward_seconds",
         "max_solution_error_to_closed_form",
         "max_box_constraint_violation",
         "loss",

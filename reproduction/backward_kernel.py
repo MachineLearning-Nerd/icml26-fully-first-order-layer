@@ -7,6 +7,7 @@ import types
 from pathlib import Path
 
 import numpy as np
+import psutil
 import torch
 
 
@@ -51,6 +52,11 @@ def configure_cores(cores):
     torch.set_num_interop_threads(1)
 
 
+def report_memory(stage):
+    rss_gb = psutil.Process().memory_info().rss / (1024**3)
+    print(f"KERNEL_STAGE stage={stage} rss_gb={rss_gb:.3f}", flush=True)
+
+
 def solve_once(model, x, target):
     model.zero_grad(set_to_none=True)
     started = time.perf_counter()
@@ -78,8 +84,6 @@ def solve_once(model, x, target):
         ),
         "max_box_constraint_violation": float(torch.clamp(feasibility, min=0.0)),
         "q_gradient_norm": float(torch.linalg.vector_norm(q.grad)),
-        "q": q.detach().cpu().reshape(-1).tolist(),
-        "solution": solution.detach().cpu().reshape(-1).tolist(),
     }
 
 
@@ -87,7 +91,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--method", choices=["ffocp_eq", "qpth", "cvxpylayer"], required=True)
     parser.add_argument("--seed", type=int, required=True)
-    parser.add_argument("--repetitions", type=int, default=2)
     parser.add_argument("--cores", type=int, default=8)
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -95,6 +98,7 @@ def main():
 
     configure_cores(args.cores)
     configure_vendor()
+    report_memory("configured")
     from data import genData
     from models import OptModel
 
@@ -107,6 +111,7 @@ def main():
         NUM_SAMPLES,
         BATCH_SIZE,
     )
+    report_memory("data_ready")
     model = OptModel(
         INPUT_DIM,
         Y_DIM,
@@ -120,11 +125,11 @@ def main():
         backward_eps=1e-6,
         is_QP=True,
     )
+    report_memory("model_ready")
     model.train()
     x, target = next(iter(train_loader))
-
-    warmup = solve_once(model, x, target)
-    measurements = [solve_once(model, x, target) for _ in range(args.repetitions)]
+    measurement = solve_once(model, x, target)
+    report_memory("backward_complete")
     evidence = {
         "method": args.method,
         "seed": args.seed,
@@ -139,11 +144,10 @@ def main():
                 else args.cores
             ),
             "ffolayer_backward_tolerance": 1e-6,
-            "warmup_runs": 1,
-            "timed_repetitions": args.repetitions,
+            "process_isolated": True,
+            "timed_repetitions": 1,
         },
-        "warmup": warmup,
-        "measurements": measurements,
+        "measurement": measurement,
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n")
@@ -153,12 +157,11 @@ def main():
             {
                 "method": args.method,
                 "seed": args.seed,
-                "forward_seconds": [row["forward_seconds"] for row in measurements],
-                "backward_seconds": [row["backward_seconds"] for row in measurements],
-                "max_solution_error": max(
-                    row["solution_max_abs_error_to_closed_form"]
-                    for row in measurements
-                ),
+                "forward_seconds": measurement["forward_seconds"],
+                "backward_seconds": measurement["backward_seconds"],
+                "max_solution_error": measurement[
+                    "solution_max_abs_error_to_closed_form"
+                ],
             },
             sort_keys=True,
         )

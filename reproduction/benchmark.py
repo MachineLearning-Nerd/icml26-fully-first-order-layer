@@ -27,20 +27,18 @@ def run_command(command, transcript, timeout):
             command,
             check=False,
             text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
             timeout=timeout,
         )
     except subprocess.TimeoutExpired as error:
         transcript.parent.mkdir(parents=True, exist_ok=True)
-        stdout = error.stdout or ""
-        if isinstance(stdout, bytes):
-            stdout = stdout.decode(errors="replace")
-        transcript.write_text(stdout + f"\nTIMEOUT_SECONDS {timeout}\n")
+        transcript.write_text(
+            f"COMMAND {' '.join(command)}\nTIMEOUT_SECONDS {timeout}\n"
+        )
         raise
     transcript.parent.mkdir(parents=True, exist_ok=True)
-    transcript.write_text(completed.stdout)
-    print(completed.stdout, end="")
+    transcript.write_text(
+        f"COMMAND {' '.join(command)}\nRETURN_CODE {completed.returncode}\n"
+    )
     if completed.returncode != 0:
         raise RuntimeError(f"Command failed ({completed.returncode}): {' '.join(command)}")
     return time.time() - started
@@ -66,76 +64,83 @@ def run_backward_kernels(output):
     rows = []
     for seed in SEEDS:
         for method in METHODS:
-            raw_path = (output / "kernels" / f"{method}_seed{seed}.json").resolve()
-            transcript = output / "transcripts" / f"kernel_{method}_seed{seed}.txt"
-            command = [
-                sys.executable,
-                "-m",
-                "reproduction.backward_kernel",
-                "--method",
-                method,
-                "--seed",
-                str(seed),
-                "--repetitions",
-                "2",
-                "--cores",
-                str(EFFECTIVE_CORES),
-                "--output",
-                str(raw_path),
-            ]
-            wall_seconds = run_command(command, transcript, timeout=1800)
-            raw = json.loads(raw_path.read_text())
-            timed = raw["measurements"]
-            rows.append(
-                {
-                    "seed": seed,
-                    "method": method,
-                    "median_forward_seconds": statistics.median(
-                        item["forward_seconds"] for item in timed
-                    ),
-                    "median_backward_seconds": statistics.median(
-                        item["backward_seconds"] for item in timed
-                    ),
-                    "max_solution_error_to_closed_form": max(
-                        item["solution_max_abs_error_to_closed_form"]
-                        for item in timed
-                    ),
-                    "max_box_constraint_violation": max(
-                        item["max_box_constraint_violation"] for item in timed
-                    ),
-                    "loss": timed[0]["loss"],
-                    "q_gradient_norm": timed[0]["q_gradient_norm"],
-                    "raw_path": str(raw_path.relative_to(Path.cwd())),
-                    "raw_sha256": sha256(raw_path),
-                    "transcript_sha256": sha256(transcript),
-                    "wall_seconds": wall_seconds,
-                }
-            )
-            progress = {"seeds": SEEDS, "methods": METHODS, "completed": rows}
-            (output / "claim_4_progress.json").write_text(
-                json.dumps(progress, indent=2, sort_keys=True) + "\n"
-            )
+            for replicate in [1, 2]:
+                raw_path = (
+                    output / "kernels" / f"{method}_seed{seed}_rep{replicate}.json"
+                ).resolve()
+                transcript = (
+                    output
+                    / "transcripts"
+                    / f"kernel_{method}_seed{seed}_rep{replicate}.txt"
+                )
+                command = [
+                    sys.executable,
+                    "-m",
+                    "reproduction.backward_kernel",
+                    "--method",
+                    method,
+                    "--seed",
+                    str(seed),
+                    "--cores",
+                    str(EFFECTIVE_CORES),
+                    "--output",
+                    str(raw_path),
+                ]
+                wall_seconds = run_command(command, transcript, timeout=1800)
+                raw = json.loads(raw_path.read_text())
+                timed = raw["measurement"]
+                rows.append(
+                    {
+                        "seed": seed,
+                        "method": method,
+                        "replicate": replicate,
+                        "forward_seconds": timed["forward_seconds"],
+                        "backward_seconds": timed["backward_seconds"],
+                        "max_solution_error_to_closed_form": timed[
+                            "solution_max_abs_error_to_closed_form"
+                        ],
+                        "max_box_constraint_violation": timed[
+                            "max_box_constraint_violation"
+                        ],
+                        "loss": timed["loss"],
+                        "q_gradient_norm": timed["q_gradient_norm"],
+                        "raw_path": str(raw_path.relative_to(Path.cwd())),
+                        "raw_sha256": sha256(raw_path),
+                        "transcript_sha256": sha256(transcript),
+                        "wall_seconds": wall_seconds,
+                    }
+                )
+                progress = {"seeds": SEEDS, "methods": METHODS, "completed": rows}
+                (output / "claim_4_progress.json").write_text(
+                    json.dumps(progress, indent=2, sort_keys=True) + "\n"
+                )
 
     by_seed = {
-        seed: {row["method"]: row for row in rows if row["seed"] == seed}
+        seed: {
+            method: [row for row in rows if row["seed"] == seed and row["method"] == method]
+            for method in METHODS
+        }
         for seed in SEEDS
     }
     qpth_ratios = [
-        math.log(by_seed[seed]["ffocp_eq"]["median_backward_seconds"])
-        - math.log(by_seed[seed]["qpth"]["median_backward_seconds"])
+        math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["ffocp_eq"]))
+        - math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["qpth"]))
         for seed in SEEDS
     ]
     cvx_ratios = [
-        math.log(by_seed[seed]["ffocp_eq"]["median_backward_seconds"])
-        - math.log(by_seed[seed]["cvxpylayer"]["median_backward_seconds"])
+        math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["ffocp_eq"]))
+        - math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["cvxpylayer"]))
         for seed in SEEDS
     ]
     qpth_loss_gaps = [
-        abs(by_seed[seed]["ffocp_eq"]["loss"] - by_seed[seed]["qpth"]["loss"])
+        abs(by_seed[seed]["ffocp_eq"][0]["loss"] - by_seed[seed]["qpth"][0]["loss"])
         for seed in SEEDS
     ]
     cvx_loss_gaps = [
-        abs(by_seed[seed]["ffocp_eq"]["loss"] - by_seed[seed]["cvxpylayer"]["loss"])
+        abs(
+            by_seed[seed]["ffocp_eq"][0]["loss"]
+            - by_seed[seed]["cvxpylayer"][0]["loss"]
+        )
         for seed in SEEDS
     ]
     return {
@@ -144,8 +149,8 @@ def run_backward_kernels(output):
             "y_dim": 800,
             "generated_samples": 2000,
             "batch_size": 1,
-            "warmup_runs": 1,
-            "timed_repetitions_per_seed": 2,
+            "process_isolated": True,
+            "timed_fresh_processes_per_seed": 2,
             "seeds": SEEDS,
             "effective_cpu_cores": EFFECTIVE_CORES,
             "methods": METHODS,
