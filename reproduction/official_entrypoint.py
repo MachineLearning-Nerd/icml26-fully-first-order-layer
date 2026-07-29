@@ -34,6 +34,7 @@ def main():
     sys.path.insert(0, str(script.parent))
     sys.path.insert(1, str(vendor))
     sys.path.insert(2, str(vendor / "src"))
+    sys.path.insert(3, str(vendor.parent / "cvxtorch"))
     try:
         from dqp import dQP as _unused_dqp
     except (ImportError, AttributeError):

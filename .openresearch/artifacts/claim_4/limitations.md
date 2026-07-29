@@ -13,3 +13,6 @@
 - The optional dQP import is unavailable in the locked environment. The fixed
   wrapper supplies a fail-closed placeholder because dQP is not selected by
   any Claim 4 run.
+- The official FFOLayer requires cvxtorch. The wrapper adds the already
+  vendored exact cvxtorch source at commit
+  `bae2d6494695a19cf1d2ee275d9058de3311a272` to the module search path.
