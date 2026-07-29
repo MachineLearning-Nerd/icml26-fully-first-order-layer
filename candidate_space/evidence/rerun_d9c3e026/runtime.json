@@ -1,0 +1,5 @@
+{
+  "claim_6_runtime_seconds": 5854.907488246914,
+  "status": "BLOCKED",
+  "terminal_reason": "claim verifier exited 2 before the cumulative summary"
+}

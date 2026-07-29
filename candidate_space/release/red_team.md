@@ -24,3 +24,19 @@ limitation, Git SHA, seed scope, CPU allocation, and runtime was locatable.
 No repository-only fact was used. `release/traversal.json` records the
 machine-checked file list. Result: **PASS**, with no missing visibility-matrix
 cell.
+
+## Round 3 after independent replication
+
+The reviewer restarted at `README.md` after run `d9c3e026` contradicted the
+apparent Claim 6 falsification. The prior default page still presented only
+the favorable clean run, so Claim 6 was treated as unsupported. The candidate
+was corrected to put `BLOCKED` in navigation, show both complete confidence
+intervals inline, link all ten rerun method/seed files, expose the independent
+replication checker and its exit-2 missing-run control, and document all four
+verification/falsification routes.
+
+The reviewer then repeated the canonical traversal without repository
+knowledge. Claims 1–5 retained their current contracts, code, data, checkers,
+controls, and limitations. Claim 6's conflicting evidence and reason for
+blocking were directly locatable. Result: **PASS**. No favorable Claim 6
+verdict is forecast.

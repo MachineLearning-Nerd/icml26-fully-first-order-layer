@@ -1,7 +1,7 @@
 # Current cumulative verification
 
 Previous live judged score: **6/12**. Conservative projected score:
-**10–12/12**. Best-supported possible score: **12/12 (forecast, not a judge
+**8–10/12**. Best-supported possible score: **10/12 (forecast, not a judge
 result)**.
 
 The fixed command is:
@@ -18,6 +18,13 @@ exited 2. See [runtime JSON](../../evidence/current/runtime.json),
 [checker output](../../evidence/current/checker_output.txt), and
 [control output](../../evidence/current/negative_control_output.txt).
 
+Independent candidate run `d9c3e026-59a1-4c3c-a09e-df6942335b00` at Git
+`99a194a894e3d8204d586d140eb2b79ae4b1f372` reran the same command. Claims
+1–5 passed, but Claim 6 correctly exited 2 because its paired runtime CI
+`[-1.35422, 0.82206]` crossed zero. See the
+[replication summary](../../evidence/current/claim_6_replication_summary.json)
+and [complete rerun evidence](../../evidence/rerun_d9c3e026/claim_6.json).
+
 ## Visibility matrix
 
 | Claim | Canonical page | Code visible | Data inline | Raw link | Checker | Control | Exact claim tested | Reviewer verdict |
@@ -27,7 +34,7 @@ exited 2. See [runtime JSON](../../evidence/current/runtime.json),
 | 3 | [Claim 3](../claims/claim_3/page.md) | yes | yes | yes | yes | yes | yes | VERIFIED |
 | 4 | [Claim 4](../claims/claim_4/page.md) | yes | yes | yes | yes | yes | yes | FALSIFIED |
 | 5 | [Claim 5](../claims/claim_5/page.md) | yes | yes | yes | yes | yes | yes | VERIFIED |
-| 6 | [Claim 6](../claims/claim_6/page.md) | yes | yes | yes | yes | yes | yes | FALSIFIED |
+| 6 | [Claim 6](../claims/claim_6/page.md) | yes | yes | yes | yes | yes | yes | BLOCKED |
 
 Pinned inputs: [pyproject.toml](../../evidence/current/pyproject.toml),
 [uv.lock](../../evidence/current/uv.lock), and
@@ -41,5 +48,5 @@ Claim 3's universal rate rests on an independently reconstructed symbolic
 dependency certificate, not on fitting a finite empirical slope. Claim 4 is
 falsified through its full-scale backward-speed conjunct; that logical
 counterexample does not claim the Sudoku accuracy conjunct is false. Claim 6
-is falsified at the smallest dimension explicitly reported in Figure 5 with
-five rather than ten seeds. The judge alone can change the score.
+remains blocked because two complete five-seed protocols disagree on the
+decisive runtime direction. The judge alone can change the score.

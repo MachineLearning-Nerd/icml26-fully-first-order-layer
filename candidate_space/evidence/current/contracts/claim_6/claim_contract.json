@@ -14,7 +14,7 @@
     "loss_noninferiority_margin": 0.005,
     "minimum_training_improvement": 0.01
   },
-  "decision": "FALSIFIED if the complete paired evidence at this reported dimension contradicts loss or runtime superiority. A favorable result is scoped corroboration only and remains BLOCKED because one dimension cannot verify the broad consistently-outperform quantifier",
+  "decision": "FALSIFIED only if complete paired evidence at this reported dimension contradicts loss or runtime superiority and an independent cumulative rerun preserves that direction. A favorable, inconclusive, or directionally unstable result remains BLOCKED because one dimension cannot verify the broad consistently-outperform quantifier",
   "lpgd": {
     "upstream_commit": "3e7243a808ce983279e31c24932188ee905c58d0",
     "mode": "lpgd",

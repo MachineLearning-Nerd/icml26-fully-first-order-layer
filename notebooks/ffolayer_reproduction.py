@@ -15,12 +15,13 @@ def _():
         | Result | Reproduced evidence |
         | --- | --- |
         | Final loss, FFOLayer − LPGD | 95% CI `[-0.000874, 0.001898]` |
-        | Complete runtime, FFOLayer / LPGD | log-ratio CI `[0.0301, 0.3364]` |
-        | Paired seeds | FFOLayer slower in `5 / 5` |
-        | Verdict on “consistently outperforms LPGD” | **FALSIFIED** |
+        | Clean-run complete runtime | log-ratio CI `[0.0301, 0.3364]` |
+        | Independent rerun complete runtime | log-ratio CI `[-1.3542, 0.8221]` |
+        | Verdict on “consistently outperforms LPGD” | **BLOCKED** |
 
-        The methods converge to matched held-out decision loss, so the timing
-        contradiction is not explained by one method simply failing to train.
+        Both runs converge to matched held-out decision loss. Their decisive
+        runtime directions disagree, so selecting only the clean falsification
+        run would be post-hoc evidence selection.
         """
     )
     return (mo,)
@@ -35,8 +36,8 @@ def _(mo):
 
 @app.cell
 def _(mo, seed):
-    ffo_seconds = [705.095, 763.440, 775.331, 594.794, 578.868]
-    lpgd_seconds = [686.764, 690.562, 549.589, 469.735, 469.398]
+    ffo_seconds = [482.978, 433.108, 366.244, 409.158, 365.154]
+    lpgd_seconds = [405.877, 494.556, 312.713, 309.241, 2230.444]
     index = seed.value - 1
     ratio = ffo_seconds[index] / lpgd_seconds[index]
     mo.md(
@@ -61,8 +62,8 @@ def _(mo):
     Execution order alternates by seed.
 
     A favorable result at one dimension could only corroborate the broad
-    word “consistently.” A contradiction at a reported dimension is enough
-    to falsify it.
+    word “consistently.” A stable contradiction could falsify it, but the
+    complete independent rerun did not preserve the runtime direction.
 
     ## Other claims
 

@@ -1,0 +1,2 @@
+CLAIM6_REPLICATION_CHECK FAIL: a run does not have the registered complete scope
+EXIT_CODE=2

@@ -16,3 +16,8 @@
   LPGD comparison is executable.
 - No failure caused by installation, memory, or runtime is scientific evidence
   for or against the claim.
+- The clean full-horizon run's runtime contradiction did not replicate
+  directionally in the release-candidate rerun. The rerun completed every
+  optimizer iteration, but LPGD seed 5 took 2,230.44 seconds versus 365.15
+  seconds for FFOLayer, widening the paired log-runtime CI across zero.
+  Therefore Claim 6 is `BLOCKED`, not `FALSIFIED`.

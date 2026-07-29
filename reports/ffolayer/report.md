@@ -1,28 +1,29 @@
 # A Fully First-Order Layer: claim-by-claim reproduction
 
-![All five paired full-horizon runs made FFOLayer slower than LPGD](images/claim6_runtime_ratio.png)
+![FFOLayer backward is slower than qpth at the reported dimension](images/claim4_backward_ratio.png)
 
 The paper asks whether differentiable optimization can avoid Hessian inversion
 without sacrificing useful gradients or empirical performance. We reproduced
 each of its six judged claims with the released implementation, independently
 pinned baselines, deterministic tests, and a single locked `uv` environment.
-Four claims are verified; two broad speed claims are falsified by faithful
-counterexamples. This is a forecasted evidence improvement, not a new judge
-score.
+Four claims are verified, one speed claim is falsified, and the LPGD claim is
+blocked by conflicting complete replications. This is a forecasted evidence
+improvement, not a new judge score.
 
 ## Strongest result
 
-Actual FFOLayer and actual LPGD were trained for the full 1,000-iteration
-horizon at the smallest dimension explicitly shown in Figure 5. Both methods
-converged to matched held-out decision loss, but FFOLayer was slower in every
-paired seed. The 95% CI for log runtime ratio was `[0.0301, 0.3364]`, entirely
-above zero.
+At the paper's main `input_dim=640`, `y_dim=800` QP scale, equivalent
+closed-form-checked solutions put FFOLayer's backward pass slower than qpth:
+the paired log-ratio CI is wholly above the registered 1.25× threshold. This
+directly falsifies the “substantially faster backward pass” conjunct.
 
 ![Both methods converge](images/claim6_convergence.png)
 
-The loss-difference CI `[-0.000874, 0.001898]` lies inside the preregistered
-`0.005` margin. This matters: a slow implementation that also converged poorly
-would not isolate the paper's “outperforms LPGD” claim.
+Actual FFOLayer and actual LPGD also converged to a matched final-loss CI
+`[-0.000874, 0.001898]` over two identical full-horizon protocols. Runtime did
+not replicate: the clean run's log-ratio CI `[0.0301, 0.3364]` favored LPGD,
+while the independent candidate rerun's `[-1.3542, 0.8221]` crossed zero.
+Claim 6 is therefore blocked, not cherry-picked as falsified.
 
 ## Implementation path
 
@@ -38,19 +39,21 @@ One post-hoc checker correction is disclosed. The first full run completed all
 science but rejected legitimate zero-gradient saturated batches. The corrected
 predicate rejects only a method/seed run whose *entire* gradient sequence is
 zero. Byte-for-byte reconstruction of the first run and a clean second full
-run both produce the same scientific verdict.
+run produced a scoped falsification. A third independent cumulative execution
+completed every method/seed horizon but did not reproduce the runtime
+direction, so it supersedes that verdict with `BLOCKED`.
 
-## The two empirical counterexamples
+## Empirical counterexample and instability
 
 The qpth comparison uses the paper's main `input_dim=640`, `y_dim=800` scale,
 eight seeds, two warmups, and 12 randomized within-process timing blocks.
 Solutions agree with the independent closed form within `0.001908`, while the
 paired backward-time interval puts FFOLayer slower than qpth.
 
-![FFOLayer backward is slower than qpth](images/claim4_backward_ratio.png)
-
 This falsifies the paper's “substantially faster backward pass” conjunct. It
 does not claim the Sudoku accuracy conjunct is false.
+
+![One clean LPGD run favored LPGD, but that direction did not replicate](images/claim6_runtime_ratio.png)
 
 ## Algorithmic and interface checks
 
@@ -76,16 +79,16 @@ error `9.82e-5`.
 | 3 | `O~(delta^-1 epsilon^-3)` under general convex constraints | symbolic dependency certificate plus nonlinear SOC audit | VERIFIED |
 | 4 | matched benchmarks and substantially faster backward | equivalent QP solutions, but FFOLayer backward slower than qpth | FALSIFIED |
 | 5 | objective-agnostic PyTorch substitution | 27 actual CvxpyLayer comparisons; max gradient error 9.82e-5 | VERIFIED |
-| 6 | consistently outperforms LPGD | matched convergence; FFOLayer slower in all five paired seeds | FALSIFIED |
+| 6 | consistently outperforms LPGD | matched convergence; two complete runtime intervals disagree | BLOCKED |
 
 ## Compute and limits
 
 The clean cumulative run used Hugging Face `cpu-upgrade`, eight numerical
-threads, 64 allocated CPUs, at most 1.91 GB RSS, and 6,636.64 seconds. Claim 6
-uses five rather than ten seeds, `y_dim=200` rather than the main `800`, and
-the public code's 2,000 samples rather than the appendix's 2,048. Those
-deviations limit favorable generalization but do not invalidate a
-reported-dimension counterexample to “consistently.”
+threads, 64 allocated CPUs, at most 1.91 GB RSS, and 6,636.64 seconds. The
+candidate rerun spent 5,854.91 seconds on Claim 6. Claim 6 uses five rather
+than ten seeds, `y_dim=200` rather than the main `800`, and the public code's
+2,000 samples rather than the appendix's 2,048. The conflicting runtime
+intervals prevent either verification or falsification.
 
 Important branches:
 [baseline](https://github.com/MachineLearning-Nerd/icml26-repro-jJur8Fq7IK-a-fully-first-order-layer-for-differentiable-optimization/tree/orx/frozen-baseline-exact-source-and-claims-1-2-regr),

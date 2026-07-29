@@ -1,0 +1,74 @@
+{
+  "claim": 6,
+  "final_status": "BLOCKED",
+  "reason": "Two complete five-seed full-horizon runs disagree on the decisive runtime direction; selecting only the clean falsification run would be post-hoc evidence selection.",
+  "routes": [
+    {
+      "route": 1,
+      "kind": "named-algorithm source audit",
+      "result": "Actual LPGD primary commit 3e7243a was reconstructed; ordinary diffcp cannot execute mode=lpgd.",
+      "resolution": "implementation identity established, claim not decided"
+    },
+    {
+      "route": 2,
+      "kind": "one-step calibration",
+      "run_id": "f205adfa-bc9a-4713-9d00-ef05530f7b43",
+      "result": "Released dimension, tolerances, closed-form solutions, gradients, and timing instrumentation passed.",
+      "resolution": "CALIBRATION_ONLY"
+    },
+    {
+      "route": 3,
+      "kind": "five-seed full-horizon scoped falsification",
+      "run_id": "0d73138a-819e-4596-b2d1-b194b364f3a8",
+      "git_sha": "1d80e5b88705879f998c63357fb06088062d103e",
+      "final_test_loss_ffolayer_minus_lpgd_ci95": [
+        -0.0008742192010455364,
+        0.001898001454310896
+      ],
+      "runtime_log_ffolayer_over_lpgd_ci95": [
+        0.030136254493392745,
+        0.33644682016442173
+      ],
+      "result": "FALSIFIED in this run"
+    },
+    {
+      "route": 4,
+      "kind": "mandatory independent falsification rerun",
+      "run_id": "d9c3e026-59a1-4c3c-a09e-df6942335b00",
+      "git_sha": "99a194a894e3d8204d586d140eb2b79ae4b1f372",
+      "final_test_loss_ffolayer_minus_lpgd_ci95": [
+        -0.0008742192010455364,
+        0.001898001454310896
+      ],
+      "runtime_log_ffolayer_over_lpgd_ci95": [
+        -1.3542203114151148,
+        0.8220612955157375
+      ],
+      "per_seed_wall_seconds": {
+        "1": {
+          "ffolayer": 482.97848392510787,
+          "lpgd": 405.87686063791625
+        },
+        "2": {
+          "ffolayer": 433.1076537191402,
+          "lpgd": 494.5555831720121
+        },
+        "3": {
+          "ffolayer": 366.24397849314846,
+          "lpgd": 312.71312446775846
+        },
+        "4": {
+          "ffolayer": 409.1575598709751,
+          "lpgd": 309.2414318120573
+        },
+        "5": {
+          "ffolayer": 365.15352423884906,
+          "lpgd": 2230.4440639920067
+        }
+      },
+      "claim_6_runtime_seconds": 5854.907488246914,
+      "checker_exit": 2,
+      "result": "inconclusive; falsification did not replicate"
+    }
+  ]
+}
