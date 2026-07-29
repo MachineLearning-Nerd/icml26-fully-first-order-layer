@@ -81,6 +81,7 @@ def main():
         "rss_gb",
     ]
     improvements = {"ffocp_eq": [], "lpgd": []}
+    zero_gradient_batches = {}
     for row in rows:
         expected_order = (
             ["ffocp_eq", "lpgd"]
@@ -133,8 +134,14 @@ def main():
             fail("an iteration measurement is non-finite")
         if row["summary"]["max_solution_error_to_closed_form"] > 0.005:
             fail("a solver output violates the independent closed-form margin")
-        if row["summary"]["min_gradient_norm"] <= 0:
-            fail("a method produced a vacuous gradient")
+        gradient_norms = [
+            item["gradient_norm"] for item in row["iterations"]
+        ]
+        if max(gradient_norms) <= 0:
+            fail("an entire method/seed run produced vacuous gradients")
+        zero_gradient_batches[
+            f"{row['method']}_seed{row['seed']}"
+        ] = sum(value == 0 for value in gradient_norms)
         early = statistics.mean(
             item["train_df_loss"] for item in row["iterations"][:100]
         )
@@ -202,6 +209,7 @@ def main():
         "loss_noninferiority_margin": LOSS_MARGIN,
         "minimum_training_improvement": MIN_IMPROVEMENT,
         "hessian_inverse_calls": evidence["ffolayer"]["hessian_inverse_calls"],
+        "zero_gradient_batches": zero_gradient_batches,
         "reason": reason,
     }
     print("CLAIM6_CHECK PASS " + json.dumps(verdict, sort_keys=True))

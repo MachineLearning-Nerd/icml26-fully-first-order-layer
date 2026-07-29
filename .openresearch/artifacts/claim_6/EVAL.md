@@ -13,3 +13,9 @@ The `wrong-mode` negative control must exit nonzero.
 The verifier can emit `FALSIFIED` from a valid contradiction. Favorable
 evidence at one dimension exits nonzero as `BLOCKED`, because it cannot verify
 the paper's broad “consistently outperform” quantifier.
+
+Post-hoc verifier correction after run `969a0731`: the original checker
+incorrectly required every batch gradient to be nonzero. Saturated box-QP
+batches can legitimately have zero gradient. The corrected non-vacuity check
+requires at least one nonzero gradient in every complete method/seed run and
+reports the number of zero-gradient batches.

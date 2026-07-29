@@ -5,6 +5,9 @@
   Figure 5, rather than the main Figure 3/4 `y_dim=800` configuration.
 - Five paired seeds are used instead of Appendix G.1's 10 seeds. Each run
   covers the full 1,000-iteration plot horizon.
+- Run `969a0731` completed all scientific workloads but its first checker
+  rejected legitimate zero-gradient saturated batches. The corrected checker
+  tests whole-run, rather than every-batch, gradient vacuity.
 - The primary LPGD Python sources are namespaced so they can coexist with the
   locked compiled diffcp extension. Algorithmic code and constants are
   otherwise unchanged.
