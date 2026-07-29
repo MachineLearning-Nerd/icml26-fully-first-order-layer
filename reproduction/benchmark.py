@@ -105,7 +105,7 @@ def run_backward_kernels(output):
             "ffolayer_over_qpth_backward_log_ratio": paired_summary(qpth_ratios),
             "max_ffolayer_qpth_loss_gap": max(qpth_loss_gaps),
             "max_closed_form_solution_error": max(
-                row["max_solution_error_to_closed_form"] for row in rows
+                row["solution_max_abs_error_to_closed_form"] for row in rows
             ),
             "max_box_constraint_violation": max(
                 row["max_box_constraint_violation"] for row in rows

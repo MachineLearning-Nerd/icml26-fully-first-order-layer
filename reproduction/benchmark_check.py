@@ -55,7 +55,7 @@ def main():
     numeric_keys = [
         "forward_seconds",
         "backward_seconds",
-        "max_solution_error_to_closed_form",
+        "solution_max_abs_error_to_closed_form",
         "max_box_constraint_violation",
         "loss",
         "q_gradient_norm",
@@ -105,7 +105,7 @@ def main():
     ):
         fail("the preregistered warmed randomized paper-scale design is incomplete")
     max_solution_error = max(
-        row["max_solution_error_to_closed_form"] for row in rows
+        row["solution_max_abs_error_to_closed_form"] for row in rows
     )
     max_constraint_violation = max(
         row["max_box_constraint_violation"] for row in rows
