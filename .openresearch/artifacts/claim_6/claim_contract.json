@@ -1,17 +1,20 @@
 {
   "claim": 6,
   "exact_claim": "FFOLayer outperforms actual LPGD in the reported experiments while avoiding Hessian inversion",
-  "calibration": {
-    "status": "CALIBRATION_ONLY",
-    "reported_scaling_dimension": 200,
+  "decision_scope": {
+    "reported_figure": "Figure 5",
     "input_dim": 640,
+    "output_dim": 200,
     "batch_size": 8,
-    "training_steps": 1,
+    "epochs": 5,
+    "optimizer_iterations": 1000,
+    "paired_seeds": [1, 2, 3, 4, 5],
     "ffolayer_backward_tolerance": 1e-6,
     "lpgd_solver_tolerance": 1e-12,
-    "purpose": "measure actual LPGD construction and step cost before fixing the full comparison horizon"
+    "loss_noninferiority_margin": 0.005,
+    "minimum_training_improvement": 0.01
   },
-  "full_decision": "requires actual LPGD and FFOLayer full-horizon loss curves at a reported dimension, multiple seeds, a fixed convergence margin, runtime evidence, and the already accepted no-Hessian source/oracle audit",
+  "decision": "FALSIFIED if the complete paired evidence at this reported dimension contradicts loss or runtime superiority. A favorable result is scoped corroboration only and remains BLOCKED because one dimension cannot verify the broad consistently-outperform quantifier",
   "lpgd": {
     "upstream_commit": "3e7243a808ce983279e31c24932188ee905c58d0",
     "mode": "lpgd",
@@ -19,5 +22,6 @@
     "rho": 0.1,
     "tight_solver_tolerance": 1e-12
   },
+  "negative_control": "changing the recorded actual LPGD mode to lsqr must exit nonzero",
   "verdicts": ["VERIFIED", "FALSIFIED", "BLOCKED"]
 }

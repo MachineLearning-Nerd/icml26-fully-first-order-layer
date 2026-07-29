@@ -1,8 +1,10 @@
 # Claim 6 limitations and deviations
 
 - The public code generates 2,000 samples although Appendix G.1 says 2,048.
-- The initial `y_dim=200`, one-step run is only resource calibration. It is a
-  reported scaling dimension but does not test convergence or issue a verdict.
+- The decisive run uses `y_dim=200`, the smallest dimension reported in
+  Figure 5, rather than the main Figure 3/4 `y_dim=800` configuration.
+- Five paired seeds are used instead of Appendix G.1's 10 seeds. Each run
+  covers the full 1,000-iteration plot horizon.
 - The primary LPGD Python sources are namespaced so they can coexist with the
   locked compiled diffcp extension. Algorithmic code and constants are
   otherwise unchanged.

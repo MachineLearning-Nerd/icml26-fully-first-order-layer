@@ -64,16 +64,14 @@ def main():
     run_checked(
         [sys.executable, "-m", "reproduction.benchmark_check", str(claim_4)]
     )
-    claim_6_calibration = output / "claim_6_calibration.json"
+    claim_6 = output / "claim_6.json"
     run_checked(
         [
             sys.executable,
             "-m",
-            "reproduction.lpgd_calibration",
-            "--cores",
-            "8",
+            "reproduction.lpgd_full",
             "--output",
-            str(claim_6_calibration),
+            str(claim_6),
         ],
         stream=True,
     )
@@ -81,8 +79,8 @@ def main():
         [
             sys.executable,
             "-m",
-            "reproduction.lpgd_calibration_check",
-            str(claim_6_calibration),
+            "reproduction.lpgd_full_check",
+            str(claim_6),
         ]
     )
     controls = {
@@ -137,6 +135,16 @@ def main():
                 "reproduction.benchmark_check",
                 str(claim_4),
                 "--assert-registered-speed",
+            ]
+        ),
+        "claim_6_wrong_mode_exit": run_expected_failure(
+            [
+                sys.executable,
+                "-m",
+                "reproduction.lpgd_full_check",
+                str(claim_6),
+                "--negative-control",
+                "wrong-mode",
             ]
         ),
     }
