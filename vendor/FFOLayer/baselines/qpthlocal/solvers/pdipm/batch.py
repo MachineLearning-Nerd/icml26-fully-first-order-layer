@@ -3,11 +3,18 @@ from enum import Enum
 # from block import block
 import time
 
-from qpth.util import get_sizes, bdiag
+from ...util import get_sizes, bdiag
 
 
 def lu_hack(x):
-    data, pivots = torch.linalg.lu_factor(x, pivot=not x.is_cuda)
+    if x.ndimension() == 3 and x.stride(0) == 0:
+        shared_data, shared_pivots = torch.linalg.lu_factor(
+            x[0].contiguous(), pivot=not x.is_cuda
+        )
+        data = shared_data.unsqueeze(0).expand(x.size(0), -1, -1).clone()
+        pivots = shared_pivots.unsqueeze(0).expand(x.size(0), -1).clone()
+    else:
+        data, pivots = torch.linalg.lu_factor(x.contiguous(), pivot=not x.is_cuda)
 
     if x.is_cuda:
         if x.ndimension() == 2:
