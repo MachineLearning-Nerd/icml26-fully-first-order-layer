@@ -1,0 +1,17 @@
+{
+  "claim": "The released PyTorch FFOLayer is objective-agnostic: the upper objective enters backward through the upstream dF/dy coefficient, and the layer can replace CvxpyLayer with minimal interface changes.",
+  "source_anchor": "paper source: icml_2026/06_implementation_details.tex and solver-agnostic lemma in appendix.tex",
+  "program_classes": ["box_qp", "budget_qp", "soc_qp"],
+  "upper_objectives": ["linear", "quadratic", "logsumexp"],
+  "seeds": [271, 383, 419],
+  "acceptance": {
+    "comparisons": 27,
+    "max_output_l2_error": 0.0001,
+    "max_gradient_relative_l2_error": 0.005,
+    "min_gradient_cosine": 0.999,
+    "same_call_shape": true,
+    "released_source_path_audit": true
+  },
+  "verdict_on_pass": "VERIFIED"
+}
+

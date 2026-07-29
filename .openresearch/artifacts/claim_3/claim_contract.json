@@ -1,0 +1,23 @@
+{
+  "claim": "Under Assumptions 1-3 and correct active-set identification, there exists an algorithm reaching a (delta, epsilon)-Goldstein stationary point in O~(delta^-1 epsilon^-3) oracle calls for linear and general convex lower constraints.",
+  "quantifiers": {
+    "delta": "positive",
+    "epsilon": "positive",
+    "algorithm": "existential",
+    "constraint_domain": "linear or well-behaved general convex constraints"
+  },
+  "required_routes": [
+    "symbolic dependency reconstruction against arXiv:2406.12771v2",
+    "released FFOLayer on an active nonlinear SOC family",
+    "independent first-hit calibration with multiple fixed horizons"
+  ],
+  "acceptance": {
+    "proof_dependency_exponents": {"delta": -1, "epsilon": -3},
+    "soc_rows": 8,
+    "soc_max_relative_gradient_error": 0.35,
+    "soc_min_cosine": 0.95,
+    "all_first_hit_targets_reached": true
+  },
+  "verdict_on_pass": "VERIFIED"
+}
+

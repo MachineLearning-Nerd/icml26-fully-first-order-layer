@@ -34,6 +34,23 @@ def main():
     evidence = output / "claims_1_2.json"
     run_checked([sys.executable, "-m", "reproduction.verify", "--output", str(evidence)])
     run_checked([sys.executable, "-m", "reproduction.check", str(evidence)])
+    claim_3 = output / "claim_3.json"
+    claim_5 = output / "claim_5.json"
+    run_checked(
+        [sys.executable, "-m", "reproduction.claim3", "--output", str(claim_3)]
+    )
+    run_checked(
+        [sys.executable, "-m", "reproduction.native_layer", "--output", str(claim_5)]
+    )
+    run_checked(
+        [
+            sys.executable,
+            "-m",
+            "reproduction.native_check",
+            str(claim_3),
+            str(claim_5),
+        ]
+    )
     controls = {
         "forbidden_oracle_exit": run_expected_failure(
             [
@@ -51,6 +68,32 @@ def main():
                 "reproduction.verify",
                 "--negative-control",
                 "active-boundary",
+            ]
+        ),
+        "claim_3_oracle_cost_exit": run_expected_failure(
+            [
+                sys.executable,
+                "-m",
+                "reproduction.claim3",
+                "--negative-control",
+                "oracle-cost",
+            ]
+        ),
+        "claim_3_gradient_sign_exit": run_expected_failure(
+            [
+                sys.executable,
+                "-m",
+                "reproduction.claim3",
+                "--negative-control",
+                "gradient-sign",
+            ]
+        ),
+        "claim_5_wrong_coefficient_exit": run_expected_failure(
+            [
+                sys.executable,
+                "-m",
+                "reproduction.native_layer",
+                "--negative-control",
             ]
         ),
     }
@@ -75,4 +118,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

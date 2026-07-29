@@ -1,0 +1,58 @@
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "NPY201",
+    "W605",  # Check for invalid escape sequences in docstrings (errors in py >= 3.11)
+]
+exclude = [
+    "examples",
+    "doc",
+    "*__init__.py"
+]
+
+
+[tool.pytest.ini_options]
+testpaths = [
+    "/tests/"
+]
+filterwarnings = [
+    "ignore::RuntimeWarning:cvxpy.*",
+    "ignore::FutureWarning:cvxpy.*"
+]
+
+
+[project]
+name = "cvxtorch"
+version = "0.1.0"
+description = "A CVXPY to Pytorch Expression converter."
+dependencies = [
+    "cvxpy",
+    "numpy",
+    "scipy >= 1.1.0",
+    "torch",
+]
+requires-python = ">=3.9"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pre-commit",
+    "ruff",
+    "ruff-lsp",
+    "ipython",
+    "matplotlib",
+    "jupyterlab",
+    "ipdb",
+    "marimo",
+    "pyscipopt",
+]
