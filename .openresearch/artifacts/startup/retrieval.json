@@ -1,0 +1,31 @@
+{
+  "retrieval_date": "2026-07-29",
+  "user_agent": "OpenResearch-Reproduction/1.0 (+https://github.com/MachineLearning-Nerd)",
+  "paper_html": {
+    "url": "https://ar5iv.labs.arxiv.org/html/2512.02494",
+    "sha256": "d1ff8e99ac77e9a7edf057c31115bdabe4faad6817094204ceffc8f18fc1c96b"
+  },
+  "paper_pdf": {
+    "url": "https://arxiv.org/pdf/2512.02494",
+    "sha256": "41245b95365c2ffede396f2cb48071f3bf5b749039124af5c804830994e0a14c"
+  },
+  "paper_source": {
+    "url": "https://export.arxiv.org/e-print/2512.02494",
+    "sha256": "043f3bd94fa18e7cf62f311a3090f1213c81d5c5d65059490d514d1d1a77db13"
+  },
+  "official_code": {
+    "url": "https://github.com/GT-KOALA/FFOLayer",
+    "git_sha": "28905f3e1750fca5b8918954d5d2ea5bed0cbacc"
+  },
+  "judged_space": {
+    "space_id": "DineshAI/jJur8Fq7IK",
+    "git_sha": "ff4102a948f2bee686c6573820b6b1b4ce647869"
+  },
+  "verdict_dataset": {
+    "dataset": "ICML-2026-agent-repro/verdicts",
+    "dataset_revision": "1b782309550dd756df4fd0f3ffe8dca8a32d5269",
+    "download_sha256": "0e0ba800ca0a5f55a3ab81e418e51d57907fa03179c270270d7944e23a916c77",
+    "filter": "space_id == \"DineshAI/jJur8Fq7IK\""
+  }
+}
+
