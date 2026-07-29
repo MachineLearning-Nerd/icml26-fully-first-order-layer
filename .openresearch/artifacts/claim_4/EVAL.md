@@ -5,8 +5,8 @@ Run `uv run --frozen python -m reproduction.run`. The raw aggregate is
 `run_output/kernels/` and `run_output/transcripts/`.
 
 `reproduction/benchmark_check.py` independently enforces dimensions, methods,
-seeds, finiteness, closed-form solution accuracy, feasibility, decision-loss
-equivalence, full-scale FFOLayer execution, and the paired timing interval.
+seeds, warmups, randomized blocks, finiteness, closed-form solution accuracy,
+feasibility, decision-loss equivalence, and the paired timing interval.
 The claim-direction negative control is:
 
 `uv run --frozen python -m reproduction.benchmark_check run_output/claim_4.json --assert-registered-speed`

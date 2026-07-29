@@ -1,6 +1,6 @@
 {
   "claim": 4,
-  "decision": "FALSIFIED if equivalent paper-dimensional QP solutions have a paired 95% interval placing FFOLayer backward slower than qpth",
+  "decision": "FALSIFIED if equivalent paper-dimensional QP solutions have a paired 95% interval placing FFOLayer backward at least 1.25x slower than qpth",
   "exact_registered_conjunct": "FFOLayer has a substantially faster backward pass than the named exact solvers, including qpth",
   "methods": [
     "released FFOLayer ffocp_eq",
@@ -10,8 +10,11 @@
   "numerical_contract": {
     "closed_form_solution_max_abs_error": 0.005,
     "decision_loss_equivalence_absolute_margin": 0.005,
-    "fresh_processes_per_method_seed": 2,
-    "paired_seeds": [1, 2, 3, 4, 5],
+    "warmups_per_method_seed": 2,
+    "timed_repetitions_per_method_seed": 12,
+    "paired_seeds": [1, 2, 3, 4, 5, 6, 7, 8],
+    "randomized_order_within_block": true,
+    "same_process": true,
     "substantial_speed_factor": 1.25
   },
   "registered_scale": {
