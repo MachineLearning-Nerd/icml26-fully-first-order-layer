@@ -10,10 +10,10 @@
 - The released `qpthlocal` package imported `qpth.util` despite vendoring the
   same module. Two import statements are corrected to relative imports; no
   solver logic is changed.
-- Its PyTorch 2.6 compatibility shim passed a stride-zero expanded batch to
-  MKL LU, yielding invalid pivots. The shim now materializes that input with
-  `contiguous()` before the same LU factorization; numerical inputs and solver
-  equations are unchanged.
+- Its PyTorch 2.6 compatibility shim passed a stride-zero batch of identical
+  matrices to MKL LU, yielding invalid pivots. The shim now factors the one
+  shared matrix and replicates the exact LU factors and pivots across the
+  batch; numerical inputs and solver equations are unchanged.
 - The optional dQP import is unavailable in the locked environment. The fixed
   wrapper supplies a fail-closed placeholder because dQP is not selected by
   any Claim 4 run.

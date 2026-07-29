@@ -94,7 +94,7 @@ def synthetic_benchmarks(output):
                 "--ydim",
                 "800",
                 "--backward_eps",
-                "0.001",
+                "0.000001",
                 "--device",
                 "cpu",
                 "--suffix",
@@ -107,7 +107,7 @@ def synthetic_benchmarks(output):
                 timeout=1800,
             )
             if method == "ffocp_eq":
-                filename = f"{method}_ydim800_lr0.001_seed{seed}_backwardTol0.001.csv"
+                filename = f"{method}_ydim800_lr0.001_seed{seed}_backwardTol1e-06.csv"
             else:
                 filename = f"{method}_ydim800_lr0.001_seed{seed}.csv"
             result_path = vendor / f"synthetic_results_200{suffix}" / method / filename
@@ -167,6 +167,7 @@ def synthetic_benchmarks(output):
             "epochs": 1,
             "seeds": SEEDS,
             "effective_cpu_cores": EFFECTIVE_CORES,
+            "ffolayer_backward_tolerance": 1e-6,
         },
         "measurements": measurements,
         "paired_statistics": {
