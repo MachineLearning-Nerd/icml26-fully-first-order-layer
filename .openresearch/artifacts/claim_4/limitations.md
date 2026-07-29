@@ -2,6 +2,10 @@
 
 - The synthetic run matches the released 2,000-sample implementation; the
   prose says 2,048 samples.
+- The paper reports ten-seed convergence means. The formal timing check uses
+  fixed seeds 1, 3, and 5 after a result-free calibration run showed one qpth
+  seed exceeded 30 minutes in the locked environment. This preserves the full
+  data and variable dimensions but yields a wider paired confidence interval.
 - Sudoku is one full released CPU epoch and does not establish final puzzle
   accuracy.
 - Runtime depends on the stated CPU and software stack; the paired design and

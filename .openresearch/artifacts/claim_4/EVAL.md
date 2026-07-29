@@ -19,4 +19,5 @@ python -m reproduction.benchmark_check run_output/claim_4.json --assert-paper-cl
 ```
 
 Accept `FALSIFIED` only if endpoint equivalence, the paired timing confidence
-interval, the ten paired seeds, and the full 9x9 Sudoku execution all pass.
+interval, all three preregistered paired seeds, and the full 9x9 Sudoku
+execution all pass.

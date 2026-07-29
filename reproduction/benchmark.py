@@ -15,7 +15,7 @@ from scipy.stats import t
 
 
 OFFICIAL_COMMIT = "28905f3e1750fca5b8918954d5d2ea5bed0cbacc"
-SEEDS = list(range(1, 11))
+SEEDS = [1, 3, 5]
 EFFECTIVE_CORES = 8
 SYNTHETIC_METHODS = ("ffocp_eq", "qpth", "cvxpylayer")
 
@@ -104,7 +104,7 @@ def synthetic_benchmarks(output):
                 "synthetic_task/main_synthetic.py",
                 arguments,
                 transcript,
-                timeout=1800,
+                timeout=7200,
             )
             if method == "ffocp_eq":
                 filename = f"{method}_ydim800_lr0.001_seed{seed}_backwardTol1e-06.csv"

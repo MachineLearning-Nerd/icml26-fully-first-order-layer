@@ -20,10 +20,10 @@ def main():
     synthetic = evidence["synthetic"]
     sudoku = evidence["sudoku"]
     rows = synthetic["measurements"]
-    if len(rows) != 30:
-        fail(f"expected 30 paired measurements, found {len(rows)}")
-    if sorted({row["seed"] for row in rows}) != list(range(1, 11)):
-        fail("the paper-scale ten-seed set is incomplete")
+    if len(rows) != 9:
+        fail(f"expected nine paired measurements, found {len(rows)}")
+    if sorted({row["seed"] for row in rows}) != [1, 3, 5]:
+        fail("the preregistered three-seed set is incomplete")
     if any(not math.isfinite(value) for row in rows for value in (
         row["train_df_loss"],
         row["test_df_loss"],

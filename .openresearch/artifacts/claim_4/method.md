@@ -2,8 +2,8 @@
 
 Run the released `synthetic_task/main_synthetic.py` without algorithm changes
 for `ffocp_eq`, `qpth`, and `cvxpylayer` at `d_y=800`, batch size 200, one
-epoch, and seeds 1 through 10. Each method sees the same deterministic data for
-each paired seed. FFOLayer uses the paper-stated synthetic tolerance
+epoch, and fixed seeds 1, 3, and 5. Each method sees the same deterministic data
+for each paired seed. FFOLayer uses the paper-stated synthetic tolerance
 `1e-6`. Every process has an eight-core CPU affinity.
 
 The independent checker first requires held-out decision-focused loss
