@@ -20,7 +20,7 @@ NUM_SAMPLES = 2000
 BATCH_SIZE = 8
 SEED = 1
 METHODS = ["ffocp_eq", "lpgd"]
-TOLERANCE = 1e-12
+TOLERANCES = {"ffocp_eq": 1e-6, "lpgd": 1e-12}
 LPGD_COMMIT = "3e7243a808ce983279e31c24932188ee905c58d0"
 
 
@@ -41,7 +41,7 @@ def run_method(OptModel, method, x, target):
         alpha=100,
         dual_cutoff=1e-3,
         slack_tol=1e-8,
-        backward_eps=TOLERANCE,
+        backward_eps=TOLERANCES[method],
         is_QP=True,
     )
     construction_seconds = time.perf_counter() - construction_started
@@ -55,6 +55,11 @@ def run_method(OptModel, method, x, target):
     backward_started = time.perf_counter()
     loss.backward()
     backward_seconds = time.perf_counter() - backward_started
+    lpgd_derivative_seconds = (
+        float(model.optlayer.info["dDT_time"])
+        if method == "lpgd"
+        else None
+    )
     gradient_norm = float(
         torch.sqrt(
             sum(
@@ -83,12 +88,8 @@ def run_method(OptModel, method, x, target):
         "gradient_norm": gradient_norm,
         "solution_max_abs_error_to_closed_form": solution_error,
         "rss_gb": psutil.Process().memory_info().rss / (1024**3),
-        "lpgd_solver_tolerance": TOLERANCE if method == "lpgd" else None,
-        "lpgd_derivative_seconds": (
-            float(model.optlayer.info["dDT_time"])
-            if method == "lpgd"
-            else None
-        ),
+        "backward_tolerance": TOLERANCES[method],
+        "lpgd_derivative_seconds": lpgd_derivative_seconds,
     }
     del model, optimizer, solution, q, exact, next_solution
     gc.collect()
@@ -145,7 +146,7 @@ def main():
             "mode": "lpgd",
             "tau": 1e-4,
             "rho": 0.1,
-            "solver_tolerance": TOLERANCE,
+            "solver_tolerance": TOLERANCES["lpgd"],
             "cone_program_sha256": source_sha256(
                 root / "vendor" / "diffcp_lpgd" / "cone_program.py"
             ),

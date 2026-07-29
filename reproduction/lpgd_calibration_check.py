@@ -52,6 +52,8 @@ def main():
     if (
         evidence["lpgd"]["mode"] != "lpgd"
         or evidence["lpgd"]["solver_tolerance"] != 1e-12
+        or rows[0]["backward_tolerance"] != 1e-6
+        or lpgd["backward_tolerance"] != 1e-12
         or lpgd["lpgd_derivative_seconds"] is None
         or lpgd["lpgd_derivative_seconds"] <= 0
     ):

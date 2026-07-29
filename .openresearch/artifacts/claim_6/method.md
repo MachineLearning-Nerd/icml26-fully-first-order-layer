@@ -4,7 +4,8 @@ First run one actual optimizer step per method at the smallest reported
 dimension (`y_dim=200`) with the released data generator, predictor, objective,
 Adam learning rate, and batch size 8. Use identical data and predictor
 initialization, eight CPU cores, and LPGD's paper-required `1e-12` solver
-tolerance. This is a resource calibration only and cannot issue a claim
+tolerance. FFOLayer uses the synthetic-task tolerance `1e-6` specified in
+Appendix G.1. This is a resource calibration only and cannot issue a claim
 verdict.
 
 The next child will use the observed step and construction costs to

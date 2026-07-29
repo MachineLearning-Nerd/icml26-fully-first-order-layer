@@ -7,6 +7,8 @@
     "input_dim": 640,
     "batch_size": 8,
     "training_steps": 1,
+    "ffolayer_backward_tolerance": 1e-6,
+    "lpgd_solver_tolerance": 1e-12,
     "purpose": "measure actual LPGD construction and step cost before fixing the full comparison horizon"
   },
   "full_decision": "requires actual LPGD and FFOLayer full-horizon loss curves at a reported dimension, multiple seeds, a fixed convergence margin, runtime evidence, and the already accepted no-Hessian source/oracle audit",
