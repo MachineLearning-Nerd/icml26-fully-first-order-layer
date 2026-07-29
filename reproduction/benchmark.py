@@ -16,7 +16,7 @@ from scipy.stats import t
 
 OFFICIAL_COMMIT = "28905f3e1750fca5b8918954d5d2ea5bed0cbacc"
 SEEDS = [1, 2, 3, 4, 5]
-METHODS = ["ffocp_eq", "qpth", "cvxpylayer"]
+METHODS = ["ffocp_eq", "qpth"]
 EFFECTIVE_CORES = 8
 
 
@@ -127,20 +127,8 @@ def run_backward_kernels(output):
         - math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["qpth"]))
         for seed in SEEDS
     ]
-    cvx_ratios = [
-        math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["ffocp_eq"]))
-        - math.log(statistics.median(row["backward_seconds"] for row in by_seed[seed]["cvxpylayer"]))
-        for seed in SEEDS
-    ]
     qpth_loss_gaps = [
         abs(by_seed[seed]["ffocp_eq"][0]["loss"] - by_seed[seed]["qpth"][0]["loss"])
-        for seed in SEEDS
-    ]
-    cvx_loss_gaps = [
-        abs(
-            by_seed[seed]["ffocp_eq"][0]["loss"]
-            - by_seed[seed]["cvxpylayer"][0]["loss"]
-        )
         for seed in SEEDS
     ]
     return {
@@ -159,9 +147,7 @@ def run_backward_kernels(output):
         "measurements": rows,
         "paired_statistics": {
             "ffolayer_over_qpth_backward_log_ratio": paired_summary(qpth_ratios),
-            "ffolayer_over_cvxpylayer_backward_log_ratio": paired_summary(cvx_ratios),
             "max_ffolayer_qpth_loss_gap": max(qpth_loss_gaps),
-            "max_ffolayer_cvxpylayer_loss_gap": max(cvx_loss_gaps),
             "max_closed_form_solution_error": max(
                 row["max_solution_error_to_closed_form"] for row in rows
             ),

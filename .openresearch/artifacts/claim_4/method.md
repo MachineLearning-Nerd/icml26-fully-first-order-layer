@@ -2,7 +2,7 @@
 
 For each of five paired seeds, generate the released 2,000-example synthetic
 dataset and identically initialized predictor, then execute the actual
-FFOLayer, qpth, and CvxpyLayer backward kernels at `y_dim=800`, batch size 1.
+FFOLayer and qpth backward kernels at `y_dim=800`, batch size 1.
 Two process-isolated calls are timed per method/seed pair and their median is
 the paired observation. Each subprocess has an eight-core affinity on an HF
 `cpu-upgrade` allocation. Fresh processes bound retained solver state after a

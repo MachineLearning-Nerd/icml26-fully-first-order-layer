@@ -11,8 +11,8 @@ the forward pass. Thus the registered speed conjunct is stronger than, and
 opposite to, the paper's explicit qpth comparison.
 
 The direct test uses the released synthetic QP dimensions `input_dim=640` and
-`y_dim=800`, the actual released FFOLayer, qpth, and CvxpyLayer paths, and five
-paired deterministic seeds. The released 10,000-puzzle 9x9 Sudoku and
+`y_dim=800`, the actual released FFOLayer and qpth paths, and five paired
+deterministic seeds. The released 10,000-puzzle 9x9 Sudoku and
 2,000-example synthetic FFOLayer paths are separately executed at native
 scale.
 

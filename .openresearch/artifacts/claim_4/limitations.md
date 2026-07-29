@@ -13,6 +13,10 @@
   result or as falsification.
 - A same-process repeated-kernel route was OOM-killed before producing a
   measurement. It is likewise rejected as evidence.
+- The paper-dimensional CvxpyLayer timing leg was OOM-killed during DPP model
+  construction. It is excluded from the accepted timing contract. The exact
+  registered speed conjunct is tested against qpth, whose successful output is
+  independently checked against the closed-form solution.
 - The qpth compatibility edit only makes vendored relative imports explicit
   and handles PyTorch 2.6 factorization of stride-zero shared matrices. It does
   not replace the released qpth algorithm.

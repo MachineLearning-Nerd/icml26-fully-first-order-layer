@@ -23,15 +23,11 @@ def main():
 
     kernels = evidence["backward_kernels"]
     rows = kernels["measurements"]
-    if len(rows) != 30:
-        fail(f"expected 30 process-isolated method/seed rows, found {len(rows)}")
+    if len(rows) != 20:
+        fail(f"expected 20 process-isolated method/seed rows, found {len(rows)}")
     if sorted({row["seed"] for row in rows}) != [1, 2, 3, 4, 5]:
         fail("the preregistered five-seed set is incomplete")
-    if sorted({row["method"] for row in rows}) != [
-        "cvxpylayer",
-        "ffocp_eq",
-        "qpth",
-    ]:
+    if sorted({row["method"] for row in rows}) != ["ffocp_eq", "qpth"]:
         fail("a released comparison method is missing")
     if sorted({row["replicate"] for row in rows}) != [1, 2]:
         fail("a process-isolated replicate is missing")
@@ -58,9 +54,6 @@ def main():
         fail("a solver output violates the QP constraints outside the margin")
     if statistics["max_ffolayer_qpth_loss_gap"] > LOSS_EQUIVALENCE_MARGIN:
         fail("FFOLayer and qpth decision-loss values are not equivalent")
-    if statistics["max_ffolayer_cvxpylayer_loss_gap"] > LOSS_EQUIVALENCE_MARGIN:
-        fail("FFOLayer and CvxpyLayer decision-loss values are not equivalent")
-
     qpth_ci = statistics["ffolayer_over_qpth_backward_log_ratio"]["ci95"]
     registered_speed_holds = qpth_ci[1] < -math.log(SUBSTANTIAL_SPEED_FACTOR)
     registered_speed_is_contradicted = qpth_ci[0] > 0

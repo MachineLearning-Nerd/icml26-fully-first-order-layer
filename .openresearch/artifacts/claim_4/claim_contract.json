@@ -4,8 +4,7 @@
   "exact_registered_conjunct": "FFOLayer has a substantially faster backward pass than the named exact solvers, including qpth",
   "methods": [
     "released FFOLayer ffocp_eq",
-    "released qpth",
-    "released CvxpyLayer"
+    "released qpth"
   ],
   "negative_control": "requiring FFOLayer to be at least 1.25x faster than qpth must exit nonzero when contradicted",
   "numerical_contract": {
