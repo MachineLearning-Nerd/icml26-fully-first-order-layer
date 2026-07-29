@@ -9,7 +9,7 @@ from reproduction import qp
 
 
 SEEDS = tuple(range(1701, 1709))
-DELTAS = (1e-2, 1e-3, 1e-4)
+DELTAS = (1e-2, 1e-3, 1e-4, 1e-5)
 
 
 def verify_claim_1():
@@ -28,6 +28,7 @@ def verify_claim_1():
                     "active_size": len(solved["active"]),
                     "delta": delta,
                     "absolute_error": error,
+                    "relative_error": error / max(float(np.linalg.norm(exact)), 1e-12),
                     **audit,
                 }
             )
@@ -43,17 +44,31 @@ def verify_claim_1():
         log_error = np.log([max(row["absolute_error"], 1e-30) for row in selected])
         slopes.append(float(np.polyfit(log_delta, log_error, 1)[0]))
     median_slope = float(np.median(slopes))
-    max_small_delta_error = max(
-        row["absolute_error"] for row in rows if row["delta"] == min(DELTAS)
+    max_small_delta_relative_error = max(
+        row["relative_error"] for row in rows if row["delta"] == min(DELTAS)
     )
+    contraction_ratios = []
+    for seed in SEEDS:
+        error_by_delta = {
+            row["delta"]: row["absolute_error"] for row in rows if row["seed"] == seed
+        }
+        contraction_ratios.append(error_by_delta[1e-4] / error_by_delta[1e-5])
+    median_final_contraction = float(np.median(contraction_ratios))
     if median_slope < 0.8:
         raise AssertionError(f"Expected first-order error, got slope {median_slope}")
-    if max_small_delta_error > 1e-2:
-        raise AssertionError(f"Small-delta error too large: {max_small_delta_error}")
+    if max_small_delta_relative_error > 1e-3:
+        raise AssertionError(
+            f"Small-delta relative error too large: {max_small_delta_relative_error}"
+        )
+    if median_final_contraction < 5:
+        raise AssertionError(
+            f"Insufficient final-decade contraction: {median_final_contraction}"
+        )
     return {
         "verdict": "VERIFIED",
         "median_log_log_slope": median_slope,
-        "max_error_at_delta_1e-4": max_small_delta_error,
+        "max_relative_error_at_delta_1e-5": max_small_delta_relative_error,
+        "median_error_contraction_1e-4_to_1e-5": median_final_contraction,
         "reference_sensitivity_calls": qp.SENS_CALLS,
         "ffo_sensitivity_calls_per_estimate": 0,
         "lower_solves_per_estimate": 2,
@@ -206,4 +221,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

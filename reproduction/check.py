@@ -12,10 +12,11 @@ def main():
     claim_2 = evidence["claim_2"]
     assert claim_1["verdict"] == "VERIFIED"
     assert claim_1["median_log_log_slope"] >= 0.8
-    assert claim_1["max_error_at_delta_1e-4"] <= 1e-2
+    assert claim_1["max_relative_error_at_delta_1e-5"] <= 1e-3
+    assert claim_1["median_error_contraction_1e-4_to_1e-5"] >= 5
     assert claim_1["ffo_sensitivity_calls_per_estimate"] == 0
     assert claim_1["lower_solves_per_estimate"] == 2
-    assert len(claim_1["rows"]) == 24
+    assert len(claim_1["rows"]) == 32
     assert claim_2["verdict"] == "VERIFIED"
     assert claim_2["solution_error"] <= 1e-10
     assert claim_2["ghost_gradient_error"] <= 1e-10
@@ -26,7 +27,7 @@ def main():
             {
                 "independent_checker": "PASS",
                 "claims": [1, 2],
-                "checked_rows": 32,
+                "checked_rows": 40,
             },
             sort_keys=True,
         )
@@ -35,4 +36,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -14,10 +14,10 @@
     "instances": 8,
     "active_sizes": [1, 2, 3, 4],
     "median_error_slope_min": 0.8,
-    "max_error_at_delta_1e-4": 0.01,
+    "max_relative_error_at_delta_1e-5": 0.001,
+    "median_error_contraction_1e-4_to_1e-5_min": 5,
     "lower_solves_per_estimate": 2,
     "sensitivity_calls_per_estimate": 0
   },
   "verdict_on_pass": "VERIFIED"
 }
-
