@@ -17,6 +17,10 @@
   construction. It is excluded from the accepted timing contract. The exact
   registered speed conjunct is tested against qpth, whose successful output is
   independently checked against the closed-form solution.
+- The release used proprietary Gurobi only to extract the fixed Sudoku
+  equality matrix. The reproduction explicitly constructs the same 324
+  cell/row/column/block equations and deterministically retains 249 independent
+  rows. The FFOLayer Sudoku optimization and training paths are unchanged.
 - The qpth compatibility edit only makes vendored relative imports explicit
   and handles PyTorch 2.6 factorization of stride-zero shared matrices. It does
   not replace the released qpth algorithm.

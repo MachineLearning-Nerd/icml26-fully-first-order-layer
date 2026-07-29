@@ -20,4 +20,6 @@ predeclared “substantial” threshold of 1.25x; it must exit nonzero.
 Separately execute one released FFOLayer epoch at the full synthetic
 `2000 x 800`, batch-200 scale and one released FFOLayer epoch over all 10,000
 9x9 Sudoku puzzles. These are scale and execution audits, not multi-seed
-convergence comparisons.
+convergence comparisons. The 324 fixed Sudoku cell/row/column/block equations
+are constructed explicitly and deterministically reduced to their 249
+independent rows, replacing only the release's Gurobi-based matrix extraction.

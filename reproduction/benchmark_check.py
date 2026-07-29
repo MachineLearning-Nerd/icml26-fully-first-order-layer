@@ -84,6 +84,7 @@ def main():
     if (
         sudoku_scope["total_puzzles"] != 10000
         or sudoku_scope["variables"] != 729
+        or sudoku_scope["equality_constraints"] != 249
         or sudoku_scope["board"] != "9x9"
     ):
         fail("the released Sudoku FFOLayer path is not the full 9x9 scale")

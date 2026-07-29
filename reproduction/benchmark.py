@@ -274,6 +274,8 @@ def full_ffolayer_sudoku(output):
             "entrypoint": "vendor/FFOLayer/sudoku/main_sudoku.py",
             "board": "9x9",
             "variables": 729,
+            "equality_constraints": 249,
+            "matrix_construction": "explicit cell/row/column/block equations",
             "total_puzzles": 10000,
             "training_puzzles": 9000,
             "test_puzzles": 1000,
