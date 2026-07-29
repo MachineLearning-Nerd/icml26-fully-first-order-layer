@@ -74,6 +74,7 @@ def run(output):
     wrong_coefficient_gap = None
     for problem_name in PROBLEMS:
         problem, q_cp, y_cp = build_problem(problem_name)
+        exact_problem, exact_q_cp, exact_y_cp = build_problem(problem_name)
         ffo = FFOLayer(
             problem,
             parameters=[q_cp],
@@ -85,7 +86,11 @@ def run(output):
             backward_eps=1e-9,
             max_workers=1,
         )
-        exact = CvxpyLayer(problem, parameters=[q_cp], variables=[y_cp])
+        exact = CvxpyLayer(
+            exact_problem,
+            parameters=[exact_q_cp],
+            variables=[exact_y_cp],
+        )
         for seed in SEEDS:
             values = q_value(seed)
             for objective_name in OBJECTIVES:

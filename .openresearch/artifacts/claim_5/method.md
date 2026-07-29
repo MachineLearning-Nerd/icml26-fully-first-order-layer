@@ -9,7 +9,7 @@ environment.
 One FFOLayer instance per program is reused across linear, quadratic, and
 log-sum-exp upper losses. Outputs and parameter gradients are compared against
 an actual `cvxpylayers.torch.CvxpyLayer` across three seeds and box, budget, and
-nonlinear SOC constraints. The control incorrectly reuses a different
-objective's upstream coefficient and must exit nonzero when the gradients
-diverge.
-
+nonlinear SOC constraints. Each layer receives an independently constructed,
+semantically identical DPP problem because CvxpyLayer canonicalization mutates
+CVXPY compiler state. The control incorrectly reuses a different objective's
+upstream coefficient and must exit nonzero when the gradients diverge.
