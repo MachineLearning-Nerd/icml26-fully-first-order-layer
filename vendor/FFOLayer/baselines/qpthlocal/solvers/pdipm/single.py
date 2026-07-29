@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 
-from qpth.util import get_sizes
+from ...util import get_sizes
 
 # TODO: Add more comments describing the math here.
 # https://stanford.edu/~boyd/papers/pdf/code_gen_impl.pdf

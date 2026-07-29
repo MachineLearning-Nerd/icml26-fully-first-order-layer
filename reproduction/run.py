@@ -51,6 +51,13 @@ def main():
             str(claim_5),
         ]
     )
+    claim_4 = output / "claim_4.json"
+    run_checked(
+        [sys.executable, "-m", "reproduction.benchmark", "--output", str(claim_4)]
+    )
+    run_checked(
+        [sys.executable, "-m", "reproduction.benchmark_check", str(claim_4)]
+    )
     controls = {
         "forbidden_oracle_exit": run_expected_failure(
             [
@@ -96,6 +103,15 @@ def main():
                 "--negative-control",
             ]
         ),
+        "claim_4_registered_speed_exit": run_expected_failure(
+            [
+                sys.executable,
+                "-m",
+                "reproduction.benchmark_check",
+                str(claim_4),
+                "--assert-registered-speed",
+            ]
+        ),
     }
     allocation = os.cpu_count()
     if hasattr(os, "sched_getaffinity"):
@@ -103,7 +119,7 @@ def main():
     summary = {
         "status": "PASS",
         "fixed_command": "uv run --frozen python -m reproduction.run",
-        "estimated_science_cores": 1,
+        "estimated_science_cores": 8,
         "selected_flavor": "cpu-upgrade",
         "actual_cpu_allocation": allocation,
         "runtime_seconds": time.time() - started,
