@@ -3,7 +3,7 @@ from enum import Enum
 # from block import block
 import time
 
-from qpth.util import get_sizes, bdiag
+from ...util import get_sizes, bdiag
 
 
 def lu_hack(x):
