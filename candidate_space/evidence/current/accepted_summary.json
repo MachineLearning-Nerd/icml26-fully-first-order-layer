@@ -1,0 +1,44 @@
+{
+  "source_run_id": "f59c6c2e-27c4-48e2-8da5-4b84e9dbfd04",
+  "source_git_sha": "021260fef3648000d7b668e82c6fb461e483cbc3",
+  "fixed_command": "uv run --frozen python -m reproduction.run",
+  "claim_1": {
+    "verdict": "VERIFIED",
+    "seeds": [1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708],
+    "active_sizes": [1, 2, 3, 4],
+    "deltas": [0.01, 0.001, 0.0001, 0.00001],
+    "rows": 32,
+    "median_log_log_slope": 0.9944826021640432,
+    "max_relative_error_at_delta_1e-5": 0.000013208546283518626,
+    "median_error_contraction_1e-4_to_1e-5": 9.996107590162513,
+    "lower_solves_per_estimate": 2,
+    "ffo_sensitivity_calls_per_estimate": 0
+  },
+  "claim_2": {
+    "verdict": "VERIFIED",
+    "seeds": [1801, 1802, 1803, 1804, 1805, 1806, 1807, 1808],
+    "active_sizes": [1, 2, 3, 4],
+    "rows": 8,
+    "solution_error": 0.0,
+    "ghost_gradient_error": 0.0,
+    "independent_fd_error": 1.483378601567761e-9
+  },
+  "independent_checker": {
+    "status": "PASS",
+    "checked_rows": 40
+  },
+  "negative_controls": {
+    "forbidden_oracle_exit": 2,
+    "active_boundary_exit": 2
+  },
+  "compute": {
+    "estimated_science_cores": 1,
+    "selected_flavor": "cpu-upgrade",
+    "actual_cpu_allocation": 64,
+    "science_runtime_seconds": 1.195556640625,
+    "job_duration_seconds": 26,
+    "python": "3.11.14",
+    "platform": "Linux-6.12.90-120.164.amzn2023.x86_64"
+  }
+}
+

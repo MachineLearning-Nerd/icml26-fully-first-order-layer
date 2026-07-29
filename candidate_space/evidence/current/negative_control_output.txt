@@ -1,0 +1,5 @@
+{"control": "forbidden exact-sensitivity oracle", "expected": "nonzero exit when exact sensitivity enters FFO path", "sensitivity_calls": 1}
+exit_code=2
+{"control": "active-set boundary", "expected": "nonzero exit because differentiability/local-active-set fails", "left_derivative": 0.0, "right_derivative": 1.0}
+exit_code=2
+

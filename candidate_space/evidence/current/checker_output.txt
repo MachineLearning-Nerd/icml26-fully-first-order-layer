@@ -1,0 +1,2 @@
+{"checked_rows": 40, "claims": [1, 2], "independent_checker": "PASS"}
+

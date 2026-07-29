@@ -4,5 +4,4 @@
 
 | Page |
 | --- |
-| [Current verification](#/current) |
-| [Historical rejected baseline](#/overview) |
+| [overview](#/overview) |

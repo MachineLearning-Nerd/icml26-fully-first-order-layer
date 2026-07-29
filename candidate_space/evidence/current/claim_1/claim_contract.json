@@ -1,0 +1,23 @@
+{
+  "claim": "Algorithm 1 estimates the hypergradient with no Hessian/sensitivity-inverse evaluation and O~(1) lower-level solves for fixed target accuracy; its finite-difference truncation error is first order in delta.",
+  "source_anchors": [
+    "paper source: icml_2026/05_bilevel_algo_with_theory.tex, Algorithm 1",
+    "paper source: icml_2026/05_bilevel_algo_with_theory.tex, hypergradient-accuracy theorem"
+  ],
+  "assumptions_tested": [
+    "strongly convex lower objective",
+    "LICQ active constraints",
+    "strictly positive active multipliers",
+    "locally constant active set"
+  ],
+  "acceptance": {
+    "instances": 8,
+    "active_sizes": [1, 2, 3, 4],
+    "median_error_slope_min": 0.8,
+    "max_relative_error_at_delta_1e-5": 0.001,
+    "median_error_contraction_1e-4_to_1e-5_min": 5,
+    "lower_solves_per_estimate": 2,
+    "sensitivity_calls_per_estimate": 0
+  },
+  "verdict_on_pass": "VERIFIED"
+}

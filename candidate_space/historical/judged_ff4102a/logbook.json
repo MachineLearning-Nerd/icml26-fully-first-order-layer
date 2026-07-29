@@ -8,21 +8,15 @@
     "icml2026-repro",
     "paper-jJur8Fq7IK"
   ],
-  "updated_at": "2026-07-29T13:00:00+00:00",
+  "updated_at": "2026-07-29T09:45:17+00:00",
   "root": {
     "slug": "index",
     "title": "FFOLayer: First-Order Differentiable Optimization — jJur8Fq7IK",
     "file": "pages/index.md",
     "children": [
       {
-        "slug": "current",
-        "title": "Current verification",
-        "file": "pages/current/page.md",
-        "children": []
-      },
-      {
         "slug": "overview",
-        "title": "Historical rejected baseline",
+        "title": "overview",
         "file": "pages/overview/page.md",
         "children": []
       }
