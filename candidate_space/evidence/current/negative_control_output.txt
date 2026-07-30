@@ -1,0 +1,3 @@
+CLAIM4_CHECK FAIL: negative control: FFOLayer is not at least 1.25x faster than qpth with 95% paired confidence
+CLAIM6_CHECK FAIL: the actual algorithms or paper-specific tolerances changed
+{"active_boundary_exit": 2, "claim_3_gradient_sign_exit": 2, "claim_3_oracle_cost_exit": 2, "claim_4_registered_speed_exit": 2, "claim_5_wrong_coefficient_exit": 2, "claim_6_wrong_mode_exit": 2, "forbidden_oracle_exit": 2}

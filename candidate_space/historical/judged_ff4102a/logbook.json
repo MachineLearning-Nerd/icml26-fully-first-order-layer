@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "title": "FFOLayer: First-Order Differentiable Optimization — jJur8Fq7IK",
+  "emoji": "🔧",
+  "space_id": "DineshAI/jJur8Fq7IK",
+  "paper": null,
+  "tags": [
+    "icml2026-repro",
+    "paper-jJur8Fq7IK"
+  ],
+  "updated_at": "2026-07-29T09:45:17+00:00",
+  "root": {
+    "slug": "index",
+    "title": "FFOLayer: First-Order Differentiable Optimization — jJur8Fq7IK",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "overview",
+        "title": "overview",
+        "file": "pages/overview/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 791,
+  "revision": "1785318317835732144"
+}

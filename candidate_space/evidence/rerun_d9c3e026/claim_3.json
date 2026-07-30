@@ -1,0 +1,211 @@
+{
+  "certificate": {
+    "composition": {
+      "delta_exponent": -1,
+      "outer_epsilon_exponent": -3,
+      "per_call_epsilon_exponent": 0,
+      "total_epsilon_exponent": -3
+    },
+    "general_convex_transfer": {
+      "basis": "The Appendix's O(eta) KKT perturbation is reconstructed with the standard bound ||B_tilde^dagger|| <= 2 C_B; the printed 2/C_B is treated as a correctable constant typo, not used.",
+      "verified": true
+    },
+    "limitations": "The SOC and first-hit panels are corroboration only. The universal verdict rests on the symbolic theorem dependency chain and stated assumptions.",
+    "premises": [
+      {
+        "assumptions": [
+          "strong convexity",
+          "LICQ and bounded active-Jacobian pseudoinverse",
+          "same active set",
+          "bounded primal and dual solutions",
+          "constraint gradient/Hessian regularity"
+        ],
+        "basis": "KKT sensitivity perturbation: O(eta) primal/dual and fixed active set imply O(eta) ghost solution and hypergradient error.",
+        "id": "P1",
+        "statement": "The reconstructed ghost oracle is eta-accurate.",
+        "verified": true
+      },
+      {
+        "basis": "Algorithm 1 and the accepted Claim 1 regression.",
+        "epsilon_exponent": 0,
+        "id": "P2",
+        "statement": "One eta-accurate ghost call costs O~(eta^0) oracle calls.",
+        "verified": true
+      },
+      {
+        "basis": "Kornowski et al., arXiv:2406.12771v2, Theorem 1.5 (informal statement of Theorem 4.5).",
+        "delta_exponent": -1,
+        "epsilon_exponent": -3,
+        "id": "P3",
+        "statement": "An eta-accurate gradient oracle reaches Goldstein stationarity in O(delta^-1 epsilon^-3) oracle invocations.",
+        "verified": true
+      }
+    ],
+    "quantified_claim": "For delta, epsilon > 0 and Assumptions 1-3 plus correct active-set identification, there exists an algorithm reaching a (delta,epsilon)-Goldstein stationary point with O~(delta^-1 epsilon^-3) oracle calls.",
+    "verdict": "VERIFIED"
+  },
+  "first_hit_calibration": {
+    "empirical_first_hit_exponent": 0.2524903214932204,
+    "method": "first-hit search over fixed horizons, not a formula-derived budget",
+    "rows": [
+      {
+        "epsilon": 0.2,
+        "first_hit_gradient_calls": 13,
+        "independently_calibrated": true,
+        "tested_horizons": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ]
+      },
+      {
+        "epsilon": 0.1,
+        "first_hit_gradient_calls": 16,
+        "independently_calibrated": true,
+        "tested_horizons": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ]
+      },
+      {
+        "epsilon": 0.05,
+        "first_hit_gradient_calls": 19,
+        "independently_calibrated": true,
+        "tested_horizons": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ]
+      },
+      {
+        "epsilon": 0.025,
+        "first_hit_gradient_calls": 22,
+        "independently_calibrated": true,
+        "tested_horizons": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256
+        ]
+      }
+    ],
+    "scope": "finite calibration only; the symbolic certificate carries the universal rate"
+  },
+  "nonlinear_soc": {
+    "all_finite": true,
+    "independent_oracle": "analytic derivative of Euclidean projection onto l2 ball",
+    "iteration_log_log_slope": 0.26329605153901364,
+    "max_relative_gradient_error": 0.035807816169599965,
+    "min_gradient_cosine": 0.999999997207562,
+    "program": "strongly convex QP with active nonlinear constraint ||y||_2 <= 0.8",
+    "row_count": 8,
+    "rows": [
+      {
+        "backward_iterations": 25,
+        "epsilon": 0.1,
+        "finite": true,
+        "forward_iterations": 50,
+        "gradient_cosine": 0.9999999999986782,
+        "inverse_epsilon": 10,
+        "relative_gradient_error": 0.005656453229245285,
+        "seed": 71,
+        "solution_norm": 0.8045040563784531
+      },
+      {
+        "backward_iterations": 25,
+        "epsilon": 0.05,
+        "finite": true,
+        "forward_iterations": 50,
+        "gradient_cosine": 0.9999999998831681,
+        "inverse_epsilon": 20,
+        "relative_gradient_error": 0.004283525015431671,
+        "seed": 71,
+        "solution_norm": 0.8045040563784531
+      },
+      {
+        "backward_iterations": 25,
+        "epsilon": 0.02,
+        "finite": true,
+        "forward_iterations": 75,
+        "gradient_cosine": 0.999999997207562,
+        "inverse_epsilon": 50,
+        "relative_gradient_error": 0.0015531972876835034,
+        "seed": 71,
+        "solution_norm": 0.8001585561798037
+      },
+      {
+        "backward_iterations": 50,
+        "epsilon": 0.01,
+        "finite": true,
+        "forward_iterations": 75,
+        "gradient_cosine": 0.9999999999999999,
+        "inverse_epsilon": 100,
+        "relative_gradient_error": 0.00021209209576705093,
+        "seed": 71,
+        "solution_norm": 0.8001585561798037
+      },
+      {
+        "backward_iterations": 25,
+        "epsilon": 0.1,
+        "finite": true,
+        "forward_iterations": 25,
+        "gradient_cosine": 0.9999999998010681,
+        "inverse_epsilon": 10,
+        "relative_gradient_error": 0.035807816169599965,
+        "seed": 93,
+        "solution_norm": 0.8285753036910578
+      },
+      {
+        "backward_iterations": 25,
+        "epsilon": 0.05,
+        "finite": true,
+        "forward_iterations": 50,
+        "gradient_cosine": 0.999999999396568,
+        "inverse_epsilon": 20,
+        "relative_gradient_error": 0.0010402781397418233,
+        "seed": 93,
+        "solution_norm": 0.8000924922621435
+      },
+      {
+        "backward_iterations": 50,
+        "epsilon": 0.02,
+        "finite": true,
+        "forward_iterations": 50,
+        "gradient_cosine": 1.0,
+        "inverse_epsilon": 50,
+        "relative_gradient_error": 0.00018998111545438527,
+        "seed": 93,
+        "solution_norm": 0.8000924922621435
+      },
+      {
+        "backward_iterations": 50,
+        "epsilon": 0.01,
+        "finite": true,
+        "forward_iterations": 50,
+        "gradient_cosine": 0.9999999999999999,
+        "inverse_epsilon": 100,
+        "relative_gradient_error": 0.00013095996658822614,
+        "seed": 93,
+        "solution_norm": 0.8000924922621435
+      }
+    ]
+  },
+  "official_repository_commit": "28905f3e1750fca5b8918954d5d2ea5bed0cbacc",
+  "primary_reference": "arXiv:2406.12771v2"
+}

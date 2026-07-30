@@ -1,0 +1,27 @@
+{
+  "claim": 6,
+  "exact_claim": "FFOLayer outperforms actual LPGD in the reported experiments while avoiding Hessian inversion",
+  "decision_scope": {
+    "reported_figure": "Figure 5",
+    "input_dim": 640,
+    "output_dim": 200,
+    "batch_size": 8,
+    "epochs": 5,
+    "optimizer_iterations": 1000,
+    "paired_seeds": [1, 2, 3, 4, 5],
+    "ffolayer_backward_tolerance": 1e-6,
+    "lpgd_solver_tolerance": 1e-12,
+    "loss_noninferiority_margin": 0.005,
+    "minimum_training_improvement": 0.01
+  },
+  "decision": "FALSIFIED only if complete paired evidence at this reported dimension contradicts loss or runtime superiority and an independent cumulative rerun preserves that direction. A favorable, inconclusive, or directionally unstable result remains BLOCKED because one dimension cannot verify the broad consistently-outperform quantifier",
+  "lpgd": {
+    "upstream_commit": "3e7243a808ce983279e31c24932188ee905c58d0",
+    "mode": "lpgd",
+    "tau": 0.0001,
+    "rho": 0.1,
+    "tight_solver_tolerance": 1e-12
+  },
+  "negative_control": "changing the recorded actual LPGD mode to lsqr must exit nonzero",
+  "verdicts": ["VERIFIED", "FALSIFIED", "BLOCKED"]
+}
