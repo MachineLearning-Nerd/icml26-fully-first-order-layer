@@ -1,4 +1,8 @@
-# overview
+# Historical overview
+
+> This page preserves the early development log. For the current claim
+> verdicts, use [Current cumulative verification](../current/page.md); the
+> earlier C0–C5 labels and deferred status below are not the final audit.
 
 
 ---

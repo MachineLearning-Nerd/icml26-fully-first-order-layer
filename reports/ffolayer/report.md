@@ -91,7 +91,7 @@ than ten seeds, `y_dim=200` rather than the main `800`, and the public code's
 intervals prevent either verification or falsification.
 
 Important branches:
-[baseline](https://github.com/MachineLearning-Nerd/icml26-repro-jJur8Fq7IK-a-fully-first-order-layer-for-differentiable-optimization/tree/orx/frozen-baseline-exact-source-and-claims-1-2-regr),
-[Claims 3 and 5](https://github.com/MachineLearning-Nerd/icml26-repro-jJur8Fq7IK-a-fully-first-order-layer-for-differentiable-optimization/tree/orx/released-pytorch-layer-and-nonlinear-soc-audit),
-[Claim 4](https://github.com/MachineLearning-Nerd/icml26-repro-jJur8Fq7IK-a-fully-first-order-layer-for-differentiable-optimization/tree/orx/warmed-blocked-paper-scale-backward-falsificatio),
-and [Claim 6](https://github.com/MachineLearning-Nerd/icml26-repro-jJur8Fq7IK-a-fully-first-order-layer-for-differentiable-optimization/tree/orx/five-seed-full-horizon-lpgd-comparison).
+[baseline](https://github.com/MachineLearning-Nerd/icml26-fully-first-order-layer/tree/audit/c1-c2-frozen-baseline),
+[Claims 3 and 5](https://github.com/MachineLearning-Nerd/icml26-fully-first-order-layer/tree/audit/c3-c5-layer-soc),
+[Claim 4](https://github.com/MachineLearning-Nerd/icml26-fully-first-order-layer/tree/audit/c4-warmed-backward-falsification),
+and [Claim 6](https://github.com/MachineLearning-Nerd/icml26-fully-first-order-layer/tree/audit/c6-five-seed-lpgd).

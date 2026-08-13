@@ -24,7 +24,7 @@ The frozen baseline established Claims 1–2. The tree descends through the
 released PyTorch/nonlinear-SOC audit, the paper-dimensional qpth falsification,
 the actual LPGD calibration, the five-seed full-horizon run, and its
 release-candidate replication. Release branch:
-`orx/evaluator-visible-cumulative-release-candidate`; scientific run Git
+`release/cumulative-candidate`; scientific run Git
 `99a194a894e3d8204d586d140eb2b79ae4b1f372`, run
 `d9c3e026-59a1-4c3c-a09e-df6942335b00`.
 
