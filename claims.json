@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "paper": {
+    "title": "A Fully First-Order Layer for Differentiable Optimization",
+    "arxiv": "2512.02494",
+    "submission": "jJur8Fq7IK",
+    "source_version": "arXiv v2",
+    "authors": ["Zihao Zhao", "Kai-Chia Mo", "Shing-Hei Ho", "Brandon Amos", "Kai Wang"]
+  },
+  "overall_status": "PARTIAL_C1_C2_C3_C5_VERIFIED_C4_BACKWARD_SPEED_CONJUNCT_FALSIFIED_C6_BLOCKED_HISTORICAL_SCORE_6_OF_12_NO_CURRENT_SCORE",
+  "claims": [
+    {
+      "id": "C1",
+      "name": "first_order_hypergradient",
+      "status": "VERIFIED_SCOPED",
+      "paper_anchor": "Algorithm 1 and the hypergradient-accuracy theorem",
+      "production": ["candidate_space/evidence/current/code/run.py", "candidate_space/evidence/current/code/check.py", "candidate_space/evidence/current/claim_1_2.json"],
+      "controls": ["two lower solves", "zero sensitivity-inverse calls", "active sizes 1 through 4"],
+      "scope": "Eight deterministic constrained-QP instances support the finite first-order oracle contract under the tested regularity assumptions."
+    },
+    {
+      "id": "C2",
+      "name": "active_set_ghost_equivalence",
+      "status": "VERIFIED_SCOPED",
+      "paper_anchor": "Theorem 4.1",
+      "production": ["candidate_space/evidence/current/code/qp.py", "candidate_space/evidence/current/claim_1_2.json", "candidate_space/evidence/current/contracts/claim_2/claim_contract.json"],
+      "controls": ["eight active-set instances", "independent central difference"],
+      "scope": "Original and ghost solutions and gradients agree within the finite thresholds at differentiable, regular test points."
+    },
+    {
+      "id": "C3",
+      "name": "goldstein_stationarity_rate",
+      "status": "VERIFIED_SCOPED",
+      "paper_anchor": "Linear and general-convex complexity corollaries",
+      "production": ["candidate_space/evidence/current/code/claim3.py", "candidate_space/evidence/current/code/native_check.py", "candidate_space/evidence/current/claim_3.json"],
+      "controls": ["symbolic exponent composition", "active nonlinear SOC family", "independent first-hit calibration"],
+      "scope": "The universal rate is supported by the reconstructed dependency chain; finite SOC and first-hit evidence are corroboration only."
+    },
+    {
+      "id": "C4",
+      "name": "benchmark_and_backward_speed",
+      "status": "FALSIFIED_SCOPED",
+      "paper_anchor": "Sections 6–7 and the registered benchmark/speed conjunction",
+      "production": ["candidate_space/evidence/current/code/benchmark.py", "candidate_space/evidence/current/code/benchmark_check.py", "candidate_space/evidence/current/claim_4.json"],
+      "controls": ["actual qpth", "closed-form solution check", "eight paired seeds", "randomized within-process timing"],
+      "scope": "Only the registered substantially-faster-backward conjunct is falsified at paper scale; convergence and Sudoku accuracy are not declared falsified."
+    },
+    {
+      "id": "C5",
+      "name": "solver_and_objective_agnostic_interface",
+      "status": "VERIFIED_SCOPED",
+      "paper_anchor": "Section 6 and the solver-agnostic appendix lemma",
+      "production": ["candidate_space/evidence/current/code/native_layer.py", "candidate_space/evidence/current/code/native_check.py", "candidate_space/evidence/current/claim_5.json"],
+      "controls": ["27 QP/LP/objective comparisons", "one layer instance reused", "output and gradient thresholds"],
+      "scope": "Finite interface and gradient comparisons support the tested program classes and upper objectives."
+    },
+    {
+      "id": "C6",
+      "name": "consistent_lpgd_superiority",
+      "status": "BLOCKED_REPLICATION",
+      "paper_anchor": "Figure 5 and the consistently-outperform-LPGD statement",
+      "production": ["candidate_space/evidence/current/code/lpgd_full.py", "candidate_space/evidence/current/code/lpgd_full_check.py", "candidate_space/evidence/current/claim_6_replication_summary.json"],
+      "controls": ["actual LPGD branch", "two complete five-seed full-horizon routes", "matched final-loss interval"],
+      "scope": "The decisive runtime direction conflicts across complete runs; no direction is selected and no proxy is substituted."
+    }
+  ]
+}

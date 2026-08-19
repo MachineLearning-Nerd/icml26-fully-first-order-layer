@@ -13,6 +13,17 @@ The six paper claims are assessed as four `VERIFIED`, one `FALSIFIED`, and one
 `BLOCKED`. The previous live judge score was `6/12`; the `8–10/12` figure in
 the release report is a forecast, not a new judge result.
 
+## Audit record
+
+- Overall status: `PARTIAL_C1_C2_C3_C5_VERIFIED_C4_BACKWARD_SPEED_CONJUNCT_FALSIFIED_C6_BLOCKED_HISTORICAL_SCORE_6_OF_12_NO_CURRENT_SCORE`.
+- Claim 4's falsification targets the registered substantially-faster-backward conjunct; convergence and Sudoku accuracy are not declared falsified.
+- Claim 6 remains blocked because two complete five-seed LPGD runs disagree on the decisive runtime direction.
+- Current score claim: none; `6/12` is historical evaluator context only.
+- Publication and author endorsement are not claimed.
+- Branch contract: 11 descriptive branches including `main`; no public `orx/*` branch remains.
+- All 37 pre-dossier reachable commits use `MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>`.
+- Machine-checkable records: [claims.json](claims.json), [reproduction_verdicts.json](reproduction_verdicts.json), [EVIDENCE_MANIFEST.json](EVIDENCE_MANIFEST.json), and [verify_final.py](verify_final.py).
+
 | Claim | What the paper claims | How this audit produces the claim | Evidence and result |
 | --- | --- | --- | --- |
 | 1 | Algorithm 1 gives an epsilon-approximate hypergradient using first-order information, no Hessian evaluation, and a constant number of oracle calls. | Run the finite-difference oracle on eight deterministic constrained-QP seeds with active sets 1–4 and deltas `1e-2` to `1e-4`; compare with the exact sensitivity path, count lower solves, and inspect sensitivity-inverse calls. | Median log-log slope `0.9945`, exactly two lower solves per estimate, zero FFOLayer sensitivity-inverse calls. **VERIFIED.** |

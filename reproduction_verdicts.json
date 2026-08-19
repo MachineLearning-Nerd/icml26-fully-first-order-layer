@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "paper": "jJur8Fq7IK",
+  "arxiv": "2512.02494",
+  "source_scope": "arXiv v2 source anchors, official FFOLayer release, and reconstructed actual LPGD branch",
+  "overall_verdict": "PARTIAL_FOUR_SCOPED_VERIFIED_C4_SPEED_CONJUNCT_FALSIFIED_C6_BLOCKED",
+  "claim_statuses": {
+    "C1": "VERIFIED_SCOPED",
+    "C2": "VERIFIED_SCOPED",
+    "C3": "VERIFIED_SCOPED",
+    "C4": "FALSIFIED_SCOPED",
+    "C5": "VERIFIED_SCOPED",
+    "C6": "BLOCKED_REPLICATION"
+  },
+  "key_evidence": {
+    "C1_median_log_log_slope": 0.9944826021640432,
+    "C1_lower_solves_per_estimate": 2,
+    "C1_sensitivity_calls_per_estimate": 0,
+    "C2_solution_error": 0.0,
+    "C2_ghost_gradient_error": 0.0,
+    "C2_independent_fd_error": 1.483378601567761e-9,
+    "C3_delta_exponent": -1,
+    "C3_epsilon_exponent": -3,
+    "C4_backward_log_ratio_ci95": [1.2265656541079633, 1.9518441627574266],
+    "C5_max_output_l2_error": 3.803502133006339e-9,
+    "C5_max_gradient_relative_l2_error": 9.820329262893569e-5,
+    "C5_min_gradient_cosine": 0.9999999951780578,
+    "C6_first_runtime_log_ratio_ci95": [0.030136254493392745, 0.33644682016442173],
+    "C6_independent_runtime_log_ratio_ci95": [-1.3542203114151148, 0.8220612955157375],
+    "C6_final_loss_ci95": [-0.0008742192010455364, 0.001898001454310896]
+  },
+  "historical_external_result": {
+    "score": "6/12",
+    "current_score_claim": false,
+    "forecast_in_release_report": "8–10/12 and 10/12 are forecasts only"
+  },
+  "publication": {
+    "publication_allowed": false,
+    "author_endorsement_claimed": false
+  },
+  "boundary": "Finite and symbolic audits support scoped verdicts. Claim 4's result is limited to the backward-speed conjunct; Claim 6 remains blocked because complete runtime replications disagree."
+}

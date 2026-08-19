@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "paper": "A Fully First-Order Layer for Differentiable Optimization",
+  "arxiv": "2512.02494",
+  "submission": "jJur8Fq7IK",
+  "phase": "scoped_audit_published_c1_c2_c3_c5_verified_c4_speed_conjunct_falsified_c6_blocked",
+  "overall_status": "PARTIAL_C1_C2_C3_C5_VERIFIED_C4_BACKWARD_SPEED_CONJUNCT_FALSIFIED_C6_BLOCKED_HISTORICAL_SCORE_6_OF_12_NO_CURRENT_SCORE",
+  "next_action": "Preserve the current evidence package and await external review; do not turn the forecast into a score and do not select one Claim-6 runtime direction without a new complete replication.",
+  "current_score_claim": false,
+  "publication_allowed": false,
+  "author_endorsement_claimed": false,
+  "claim4": {
+    "status": "FALSIFIED_SCOPED",
+    "scope": "registered substantially-faster-backward conjunct only",
+    "backward_log_ratio_ci95": [1.2265656541079633, 1.9518441627574266]
+  },
+  "claim6": {
+    "status": "BLOCKED_REPLICATION",
+    "runtime_intervals_disagree": true,
+    "first_runtime_log_ratio_ci95": [0.030136254493392745, 0.33644682016442173],
+    "independent_runtime_log_ratio_ci95": [-1.3542203114151148, 0.8220612955157375]
+  },
+  "historical_external_result": {
+    "score": "6/12",
+    "fresh_score_pending": true
+  },
+  "source": {
+    "paper_sha256": "043f3bd9b03d410e1cd7fd8f4949efdb78b6410d42fc83b33b9ec7da8a81b90b",
+    "official_code_commit": "28905f3e1750fca5b8918954d5d2ea5bed0cbacc",
+    "lpgd_commit": "3e7243a808ce983279e31c24932188ee905c58d0"
+  },
+  "repository": {
+    "owner": "MachineLearning-Nerd",
+    "canonical_email": "MachineLearning-Nerd@users.noreply.github.com",
+    "github": "https://github.com/MachineLearning-Nerd/icml26-fully-first-order-layer",
+    "recovery_bundle_sha256": "532970bf6bc4cb0c24c3e76912706ecb5e166e1c1a1bdc6bf1a4d112fccbe1cd"
+  }
+}
